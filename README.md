@@ -114,7 +114,7 @@ AtmosGen/
 
 ---
 
-## 📊 Key Features
+## Key Features
 
 - Multi-step satellite frame forecasting
 - Diffusion-based generative modeling
@@ -125,7 +125,7 @@ AtmosGen/
 
 ---
 
-## 🔥 Research Focus
+## Research Focus
 
 AtmosGen explores:
 
@@ -136,7 +136,7 @@ AtmosGen explores:
 
 ---
 
-## 📈 Potential Applications
+## Potential Applications
 
 - Meteorological research labs
 - Government weather agencies
@@ -146,7 +146,7 @@ AtmosGen explores:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 Github: [Rishabh1925](https://github.com/Rishabh1925)  
 LinkedIn: [Rishabh Ranjan Singh](https://www.linkedin.com/in/rishabh-ranjan-singh)
