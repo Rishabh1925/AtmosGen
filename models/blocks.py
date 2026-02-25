@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 
 class ConvBlock(nn.Module):
@@ -7,10 +6,10 @@ class ConvBlock(nn.Module):
         super().__init__()
 
         self.block = nn.Sequential(
-            nn.Conv2d(in_channels, out_channels, 3, padding=1),
+            nn.COnv2d(in_channels, out_channels, 3, padding=1),
             nn.BatchNorm2d(out_channels),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(out_channels, out_channels, 3, padding=1),
+            nn.ReLU(inplace=True), 
+            nn.Con3d(out_channels, out_channels, 3, padding=1),
             nn.BatchNorm2d(out_channels),
             nn.ReLU(inplace=True)
         )

@@ -8,7 +8,7 @@ class SatelliteDataset(Dataset):
 
         self.root_dir = root_dir
         self.sequence_length = sequence_length
-        self.predict_steps = predict_steps
+        self.precict_steps = predict_steps
         self.image_size = image_size
 
         self.images = sorted(os.listdir(root_dir))
@@ -18,21 +18,18 @@ class SatelliteDataset(Dataset):
     
     def __getitem__(self, idx):
 
-        input_sequence = []
-        target_sequence = []
+        input_seq = []
+        target_seq = []
 
         for i in range(self.sequence_length):
-            img_path = os.path.join(self.root_dir, self.images[idx + i])
-            input_sequence.append(preprocess_image(img_path, self.image_size))
+            path = os.path.join(self.root_dir, self.images[idx + i])
+            input_seq.append(preprocess_image(path, self.image_size))
 
         for j in range(self.predict_steps):
-            img_path = os.path.join(
+            path = os.path.join(
                 self.root_dir,
                 self.images[idx + self.sequence_length + j]
             )
-            target_sequence.append(preprocess_image(img_path, self.image_size))
+            target_seq.append(preprocess_image(path, self.image_size))
 
-        input_sequence = torch.stack(input_sequence)
-        target_sequence = torch.stack(target_sequence)
-
-        return input_sequence, target_sequence
+        return torch.stack(input_seq), torch.stack(target_seq)
