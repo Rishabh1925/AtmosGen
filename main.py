@@ -1,18 +1,18 @@
 import torch
 import torch.optim as optim
 
-from config import Config
-from data.loader import get_dataloader
-from models.unet import UNet
-from models.diffusion import Diffusion
-from trainer import Trainer
+from core_model.config import Config
+from core_model.data.loader import get_dataloader
+from core_model.models.unet import UNet
+from core_model.models.diffusion import Diffusion
+from core_model.trainer import Trainer
 
 
 def main():
 
     config = Config()
 
-    loader = get_dataloader(config, "data/satellite_images")
+    loader = get_dataloader(config, "core_model/data/satellite_images")
 
     model = UNet().to(config.DEVICE)
     diffusion = Diffusion(config.TIMESTEPS)
@@ -39,5 +39,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

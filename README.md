@@ -1,158 +1,229 @@
-# AtmosGen
+# AtmosGen - Production Ready System
 ### Physics-Informed Diffusion Model for Real-Time Satellite Weather Nowcasting
 
-AtmosGen is a research-oriented AI system designed for short-term weather nowcasting using satellite imagery.  
-It integrates generative diffusion modeling with physics-informed constraints to produce physically consistent and probabilistic predictions of future atmospheric motion.
-
-The system focuses on 0–2 hour satellite frame forecasting using deep generative models rather than traditional numerical weather simulation.
+AtmosGen is now a production-ready full-stack application for satellite weather nowcasting using deep generative models.
 
 ---
 
-## Motivation
+## 🚀 Quick Start
 
-Short-term forecasting (nowcasting) plays a critical role in:
+### Prerequisites
+- Python 3.8+
+- Node.js 16+
+- npm or yarn
 
-- Severe storm detection
-- Flood risk monitoring
-- Aviation safety
-- Disaster response systems
-- Climate monitoring
+### Backend Setup
 
-Conventional approaches rely on:
+1. **Navigate to backend directory:**
+```bash
+cd backend
+```
 
-1. Numerical Weather Prediction (NWP) — computationally expensive
-2. ConvLSTM-style deep learning — lacks physical consistency
-3. Optical flow extrapolation — limited temporal stability
+2. **Install Python dependencies:**
+```bash
+pip install -r requirements.txt
+```
 
-AtmosGen bridges these methods by combining generative modeling with physics-aware learning.
+3. **Start the backend server:**
+```bash
+python main.py
+```
 
----
+The backend will start on `http://localhost:8000`
 
-## Problem Definition
+### Frontend Setup
 
-Given a sequence of satellite observations:
+1. **Navigate to frontend directory:**
+```bash
+cd frontend
+```
 
-F₁, F₂, F₃, ..., Fₙ
+2. **Install Node.js dependencies:**
+```bash
+npm install
+```
 
-AtmosGen predicts:
+3. **Start the development server:**
+```bash
+npm run dev
+```
 
-Fₙ₊₁, Fₙ₊₂, ..., Fₙ₊ₖ
-
-While enforcing:
-
-- Spatial coherence
-- Temporal smoothness
-- Physically plausible motion
-- Stable cloud evolution
-- Uncertainty-aware outputs
-
----
-
-## Methodology
-
-AtmosGen integrates:
-
-• A UNet-based latent diffusion architecture  
-• Self-attention mechanisms for extreme weather regions  
-• Optical-flow consistency regularization  
-• Physics-inspired residual loss functions  
-• Monte Carlo sampling for uncertainty estimation  
-
-Instead of purely data-driven training, the model embeds motion constraints to encourage realistic atmospheric dynamics.
+The frontend will start on `http://localhost:3000`
 
 ---
 
-## System Architecture
+## 📁 Project Structure
 
-Satellite Frames  
-        ↓  
-Spatial Encoder  
-        ↓  
-Latent Diffusion Core  
-        ↓  
-Physics Constraint Module  
-        ↓  
-Future Frame Generator  
-        ↓  
-Storm Risk & Uncertainty Head  
-
----
-
-## Core Technologies
-
-- Python
-- PyTorch
-- Diffusion Models
-- UNet Architecture
-- Attention Mechanisms
-- Automatic Differentiation
-- Optical Flow Estimation
-- Physics-Informed Loss Design
-
-Developed entirely in VS Code.
-
-No Kaggle pipelines.
-
----
-
-## Project Structure
-AtmosGen/
+```
+atmosgen/
 │
-├── models/
-│   ├── unet.py
-│   ├── diffusion.py
+├── backend/                    # FastAPI backend
+│   ├── main.py                # FastAPI application
+│   ├── model_service.py       # Model loading and inference
+│   ├── schemas.py             # Pydantic schemas
+│   ├── utils.py               # Utility functions
+│   └── requirements.txt       # Python dependencies
 │
-├── physics/
-│   ├── constraints.py
+├── frontend/                   # React frontend
+│   ├── src/
+│   │   ├── App.jsx            # Main React component
+│   │   ├── App.css            # Styling
+│   │   ├── main.jsx           # React entry point
+│   │   └── index.css          # Global styles
+│   ├── package.json           # Node.js dependencies
+│   └── vite.config.js         # Vite configuration
 │
-├── data/
-│   ├── loader.py
+├── core_model/                 # ML model code
+│   ├── models/                # Neural network architectures
+│   ├── data/                  # Data loading and preprocessing
+│   ├── config.py              # Model configuration
+│   ├── sampling.py            # Inference sampling
+│   ├── trainer.py             # Training logic
+│   └── metrics.py             # Evaluation metrics
 │
-├── train.py
-├── infer.py
-└── main.py
+├── checkpoints/               # Model checkpoints
+├── main.py                    # Training script
+└── README.md                  # This file
+```
 
 ---
 
-## Key Features
+## 🔧 API Endpoints
 
-- Multi-step satellite frame forecasting
-- Diffusion-based generative modeling
-- Physics-regularized training
-- Probabilistic future predictions
-- Extreme event attention modeling
-- Uncertainty quantification
+### Health Check
+```bash
+GET /health
+```
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "model_loaded": true
+}
+```
+
+### Generate Forecast
+```bash
+POST /predict
+```
+
+**Request:** Multipart form data with image files
+
+**Example using curl:**
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -F "files=@image1.png" \
+  -F "files=@image2.png" \
+  -F "files=@image3.png"
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "generated_image": "base64_encoded_image_data",
+  "processing_time": 2.34,
+  "message": "Forecast generated successfully",
+  "input_sequence_length": 3
+}
+```
 
 ---
 
-## Research Focus
+## 🎯 Usage
 
-AtmosGen explores:
+1. **Start both backend and frontend servers** (see Quick Start above)
 
-- Hybrid physics–machine learning frameworks
-- Generative atmospheric dynamics modeling
-- Diffusion-based spatiotemporal forecasting
-- Continuous-domain learning for satellite imagery
+2. **Open your browser** to `http://localhost:3000`
 
----
+3. **Upload satellite images:**
+   - Click "Select Images" button
+   - Choose 1-10 satellite images in sequence
+   - Preview will show uploaded images
 
-## Potential Applications
-
-- Meteorological research labs
-- Government weather agencies
-- Disaster early-warning systems
-- Aviation weather monitoring
-- Climate-tech platforms
+4. **Generate forecast:**
+   - Click "Generate Forecast" button
+   - Wait for processing (loading indicator will show)
+   - View the generated future frame
 
 ---
 
-## Author
+## 🔬 Model Details
 
-Github: [Rishabh1925](https://github.com/Rishabh1925)  
-LinkedIn: [Rishabh Ranjan Singh](https://www.linkedin.com/in/rishabh-ranjan-singh)
+- **Architecture:** UNet-based conditional diffusion model
+- **Input:** Sequence of satellite images (128x128 RGB)
+- **Output:** Single future frame prediction
+- **Inference:** CPU/GPU compatible with automatic fallback
+- **Processing:** Optimized for single-batch inference
 
 ---
 
-## Status
+## 🛠️ Development
 
-Research prototype — under active development.
+### Training the Model
+```bash
+python main.py
+```
+
+### Backend Development
+```bash
+cd backend
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### Frontend Development
+```bash
+cd frontend
+npm run dev
+```
+
+---
+
+## 📊 Features
+
+✅ **Full-stack web application**  
+✅ **Real-time inference API**  
+✅ **Interactive React frontend**  
+✅ **Multi-image sequence upload**  
+✅ **Loading indicators and error handling**  
+✅ **Base64 image response format**  
+✅ **CORS support for development**  
+✅ **Health monitoring endpoint**  
+✅ **Production-ready structure**  
+
+---
+
+## 🚧 Phase 1 Limitations
+
+- No authentication system
+- No database persistence  
+- No cloud deployment
+- No Docker containerization
+- Local development only
+- Single user at a time
+
+*These will be addressed in future phases.*
+
+---
+
+## 🔮 Next Phases
+
+- **Phase 2:** Authentication & user management
+- **Phase 3:** Database integration & history
+- **Phase 4:** Docker containerization  
+- **Phase 5:** Cloud deployment & scaling
+
+---
+
+## 👨‍💻 Author
+
+**Rishabh Ranjan Singh**  
+- GitHub: [Rishabh1925](https://github.com/Rishabh1925)  
+- LinkedIn: [Rishabh Ranjan Singh](https://www.linkedin.com/in/rishabh-ranjan-singh)
+
+---
+
+## 📄 License
+
+Research prototype - under active development.
