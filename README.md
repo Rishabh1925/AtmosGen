@@ -5,7 +5,7 @@ AtmosGen is now a production-ready full-stack application for satellite weather 
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.8+
@@ -52,7 +52,7 @@ The frontend will start on `http://localhost:3000`
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 atmosgen/
@@ -60,18 +60,18 @@ atmosgen/
 ├── backend/                    # FastAPI backend
 │   ├── main.py                # FastAPI application
 │   ├── model_service.py       # Model loading and inference
+│   ├── database.py            # SQLite database operations
 │   ├── schemas.py             # Pydantic schemas
 │   ├── utils.py               # Utility functions
 │   └── requirements.txt       # Python dependencies
 │
 ├── frontend/                   # React frontend
 │   ├── src/
-│   │   ├── App.jsx            # Main React component
-│   │   ├── App.css            # Styling
-│   │   ├── main.jsx           # React entry point
-│   │   └── index.css          # Global styles
+│   │   ├── app/               # Main application components
+│   │   ├── lib/               # Utilities and API client
+│   │   └── styles/            # CSS and styling
 │   ├── package.json           # Node.js dependencies
-│   └── vite.config.js         # Vite configuration
+│   └── vite.config.ts         # Vite configuration
 │
 ├── core_model/                 # ML model code
 │   ├── models/                # Neural network architectures
@@ -88,7 +88,7 @@ atmosgen/
 
 ---
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### Health Check
 ```bash
@@ -103,6 +103,14 @@ GET /health
 }
 ```
 
+### Authentication
+```bash
+POST /auth/register
+POST /auth/login
+POST /auth/logout
+GET /auth/me
+```
+
 ### Generate Forecast
 ```bash
 POST /predict
@@ -115,7 +123,8 @@ POST /predict
 curl -X POST "http://localhost:8000/predict" \
   -F "files=@image1.png" \
   -F "files=@image2.png" \
-  -F "files=@image3.png"
+  -F "files=@image3.png" \
+  -F "forecast_name=My Forecast"
 ```
 
 **Response:**
@@ -125,31 +134,46 @@ curl -X POST "http://localhost:8000/predict" \
   "generated_image": "base64_encoded_image_data",
   "processing_time": 2.34,
   "message": "Forecast generated successfully",
-  "input_sequence_length": 3
+  "forecast_id": 123
 }
+```
+
+### Forecast History
+```bash
+GET /forecasts
+GET /forecasts/{id}
 ```
 
 ---
 
-## 🎯 Usage
+## Usage
 
 1. **Start both backend and frontend servers** (see Quick Start above)
 
 2. **Open your browser** to `http://localhost:3000`
 
-3. **Upload satellite images:**
+3. **Create an account:**
+   - Click "Sign up" 
+   - Fill in username, email, and password
+   - You'll be automatically logged in
+
+4. **Upload satellite images:**
    - Click "Select Images" button
    - Choose 1-10 satellite images in sequence
    - Preview will show uploaded images
 
-4. **Generate forecast:**
+5. **Generate forecast:**
    - Click "Generate Forecast" button
    - Wait for processing (loading indicator will show)
    - View the generated future frame
 
+6. **View forecast history:**
+   - Go to Dashboard to see all your saved forecasts
+   - Click on any forecast to view details
+
 ---
 
-## 🔬 Model Details
+## Model Details
 
 - **Architecture:** UNet-based conditional diffusion model
 - **Input:** Sequence of satellite images (128x128 RGB)
@@ -159,7 +183,7 @@ curl -X POST "http://localhost:8000/predict" \
 
 ---
 
-## 🛠️ Development
+## Development
 
 ### Training the Model
 ```bash
@@ -180,43 +204,43 @@ npm run dev
 
 ---
 
-## 📊 Features
+## Features
 
-✅ **Full-stack web application**  
-✅ **Real-time inference API**  
-✅ **Interactive React frontend**  
-✅ **Multi-image sequence upload**  
-✅ **Loading indicators and error handling**  
-✅ **Base64 image response format**  
-✅ **CORS support for development**  
-✅ **Health monitoring endpoint**  
-✅ **Production-ready structure**  
-
----
-
-## 🚧 Phase 1 Limitations
-
-- No authentication system
-- No database persistence  
-- No cloud deployment
-- No Docker containerization
-- Local development only
-- Single user at a time
-
-*These will be addressed in future phases.*
+**Full-stack web application**  
+**Real-time inference API**  
+**Interactive React frontend**  
+**Multi-image sequence upload**  
+**User authentication and accounts**  
+**Forecast history and management**  
+**Loading indicators and error handling**  
+**Base64 image response format**  
+**CORS support for development**  
+**Health monitoring endpoint**  
+**Production-ready structure**  
 
 ---
 
-## 🔮 Next Phases
+## Phase 2 Complete
 
-- **Phase 2:** Authentication & user management
-- **Phase 3:** Database integration & history
-- **Phase 4:** Docker containerization  
-- **Phase 5:** Cloud deployment & scaling
+- User authentication system
+- SQLite database integration  
+- Session management
+- Forecast history storage
+- Modern glassmorphic UI
+- Mobile-responsive design
+- Error handling and validation
 
 ---
 
-## 👨‍💻 Author
+## Next Phases
+
+- **Phase 3:** Real satellite data integration & online hosting
+- **Phase 4:** Advanced features & optimization
+- **Phase 5:** Scaling & community features
+
+---
+
+## Author
 
 **Rishabh Ranjan Singh**  
 - GitHub: [Rishabh1925](https://github.com/Rishabh1925)  
@@ -224,6 +248,6 @@ npm run dev
 
 ---
 
-## 📄 License
+## License
 
 Research prototype - under active development.

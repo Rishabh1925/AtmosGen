@@ -17,3 +17,16 @@
 2026-02-27 01:03:47,743 - main - INFO - Processing prediction request with 10 images
 2026-02-27 01:03:47,758 - model_service - INFO - Input tensor shape: torch.Size([1, 10, 3, 128, 128])
 2026-02-27 01:04:37,726 - main - INFO - Prediction completed successfully
+2026-02-27 01:33:59,185 - watchfiles.main - INFO - 2 changes detected
+2026-02-27 15:09:11,828 - main - INFO - Starting AtmosGen backend...
+2026-02-27 15:09:11,833 - database - INFO - Database initialized successfully
+2026-02-27 15:09:11,833 - main - INFO - Database initialized successfully
+2026-02-27 15:09:11,833 - model_service - INFO - Loading AtmosGen model...
+2026-02-27 15:09:11,833 - model_service - INFO - Using device: cpu
+2026-02-27 15:09:11,869 - model_service - WARNING - No checkpoint found, using randomly initialized model
+2026-02-27 15:09:11,869 - model_service - INFO - Model loaded successfully
+2026-02-27 15:09:11,869 - main - INFO - Model loaded successfully
+2026-02-27 15:09:11,915 - watchfiles.main - INFO - 6 changes detected
+2026-02-27 15:29:38,732 - database - INFO - User created successfully: testuser
+2026-02-27 15:29:38,735 - database - INFO - Session created for user 1
+2026-02-27 15:29:38,855 - watchfiles.main - INFO - 2 changes detected
