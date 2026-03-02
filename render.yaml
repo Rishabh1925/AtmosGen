@@ -4,11 +4,9 @@ services:
     env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$PORT
+    startCommand: gunicorn main_minimal:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$PORT
     healthCheckPath: /health
     envVars:
-      - key: USE_LIGHTWEIGHT_MODEL
-        value: "true"
       - key: ENVIRONMENT
         value: production
       - key: PYTHON_VERSION
