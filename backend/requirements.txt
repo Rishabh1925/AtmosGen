@@ -11,6 +11,10 @@ requests==2.32.3
 Pillow==10.4.0
 numpy==1.26.4
 
+# MongoDB dependencies
+motor==3.3.2
+pymongo==4.6.1
+
 # Skip heavy dependencies for now - add back after successful deployment
 # supabase==2.3.4  # Causing dependency conflicts
 # torch==2.4.0+cpu  # Too heavy for initial deployment

@@ -1,5 +1,5 @@
 """
-AtmosGen API - Full functionality with lightweight model for deployment
+AtmosGen API - Full functionality with MongoDB and lightweight model
 """
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Cookie, Header
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,6 +20,9 @@ import time
 
 # Load environment variables
 load_dotenv()
+
+# Import MongoDB client
+from mongodb_client import mongodb
 
 # Import schemas for API responses
 from pydantic import BaseModel
@@ -47,13 +50,9 @@ class UserLogin(BaseModel):
     password: str
 
 class UserResponse(BaseModel):
-    id: int
+    id: str
     username: str
     email: str
-
-# Simple in-memory user storage for demo
-users_db = {}
-user_counter = 1
 
 security = HTTPBearer(auto_error=False)
 
@@ -64,6 +63,13 @@ async def lifespan(app: FastAPI):
     logger.info("Starting AtmosGen backend...")
     
     try:
+        # Connect to MongoDB
+        connected = await mongodb.connect()
+        if connected:
+            logger.info("MongoDB connected successfully")
+        else:
+            logger.warning("MongoDB connection failed, some features may not work")
+        
         logger.info("Lightweight model ready for deployment")
         yield
     except Exception as e:
@@ -71,6 +77,7 @@ async def lifespan(app: FastAPI):
         raise
     finally:
         logger.info("Shutting down AtmosGen backend...")
+        await mongodb.close()
 
 # Create FastAPI app
 app = FastAPI(
@@ -116,16 +123,9 @@ async def get_current_user_unified(
     if not token:
         return None
     
-    # Simple token validation (in production, use proper JWT)
-    for user_id, user_data in users_db.items():
-        if user_data.get("token") == token:
-            return {
-                "id": user_id,
-                "username": user_data["username"],
-                "email": user_data["email"]
-            }
-    
-    return None
+    # Get user from MongoDB session
+    user = await mongodb.get_user_by_token(token)
+    return user
 
 async def require_auth_unified(current_user = Depends(get_current_user_unified)):
     """Require authentication"""
@@ -138,7 +138,7 @@ async def health_check():
     """Health check endpoint"""
     return HealthResponse(
         status="healthy",
-        message="AtmosGen API is running",
+        message="AtmosGen API is running with MongoDB",
         version="2.0.0",
         environment=os.getenv("ENVIRONMENT", "development")
     )
@@ -149,6 +149,7 @@ async def root():
     return {
         "message": "Welcome to AtmosGen API",
         "status": "running",
+        "database": "MongoDB",
         "docs": "/docs",
         "health": "/health"
     }
@@ -156,31 +157,25 @@ async def root():
 @app.post("/register")
 async def register(user_data: UserRegister):
     """Register a new user"""
-    global user_counter
     
-    # Check if user already exists
-    for user in users_db.values():
-        if user["username"] == user_data.username or user["email"] == user_data.email:
-            raise HTTPException(status_code=400, detail="User already exists")
+    # Create user in MongoDB
+    user = await mongodb.create_user(
+        username=user_data.username,
+        email=user_data.email,
+        password=user_data.password
+    )
     
-    # Create new user
-    user_id = user_counter
-    token = f"token_{user_id}_{user_data.username}"
+    if not user:
+        raise HTTPException(status_code=400, detail="User already exists")
     
-    users_db[user_id] = {
-        "username": user_data.username,
-        "email": user_data.email,
-        "password": user_data.password,  # In production, hash this!
-        "token": token
-    }
-    
-    user_counter += 1
+    # Create session token
+    token = await mongodb.create_session(user["id"])
     
     response = JSONResponse(content={
         "user": {
-            "id": user_id,
-            "username": user_data.username,
-            "email": user_data.email
+            "id": user["id"],
+            "username": user["username"],
+            "email": user["email"]
         },
         "message": "User registered successfully"
     })
@@ -199,30 +194,30 @@ async def register(user_data: UserRegister):
 async def login(user_data: UserLogin):
     """Login user"""
     
-    # Find user
-    user_found = None
-    user_id = None
-    for uid, user in users_db.items():
-        if user["username"] == user_data.username and user["password"] == user_data.password:
-            user_found = user
-            user_id = uid
-            break
+    # Authenticate user
+    user = await mongodb.get_user_by_credentials(
+        username=user_data.username,
+        password=user_data.password
+    )
     
-    if not user_found:
+    if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    # Create session token
+    token = await mongodb.create_session(user["id"])
     
     response = JSONResponse(content={
         "user": {
-            "id": user_id,
-            "username": user_found["username"],
-            "email": user_found["email"]
+            "id": user["id"],
+            "username": user["username"],
+            "email": user["email"]
         },
         "message": "Login successful"
     })
     
     response.set_cookie(
         key="auth_token",
-        value=user_found["token"],
+        value=token,
         httponly=True,
         secure=True,
         samesite="lax"
@@ -231,8 +226,12 @@ async def login(user_data: UserLogin):
     return response
 
 @app.post("/logout")
-async def logout():
+async def logout(auth_token: Annotated[str | None, Cookie()] = None):
     """Logout user"""
+    
+    if auth_token:
+        await mongodb.delete_session(auth_token)
+    
     response = JSONResponse(content={"message": "Logged out successfully"})
     response.delete_cookie("auth_token")
     return response
@@ -248,18 +247,14 @@ async def get_current_user_info(current_user = Depends(get_current_user_unified)
 @app.get("/dashboard")
 async def get_dashboard_stats(current_user = Depends(require_auth_unified)):
     """Get dashboard statistics"""
-    return {
-        "total_forecasts": 42,
-        "accuracy_rate": 87.5,
-        "recent_forecasts": [
-            {"id": 1, "location": "Mumbai", "accuracy": 89.2, "date": "2024-03-01"},
-            {"id": 2, "location": "Delhi", "accuracy": 91.1, "date": "2024-03-02"},
-            {"id": 3, "location": "Bangalore", "accuracy": 85.7, "date": "2024-03-02"}
-        ]
-    }
+    stats = await mongodb.get_dashboard_stats(current_user["id"])
+    return stats
 
 @app.post("/predict", response_model=PredictionResponse)
-async def predict(files: List[UploadFile] = File(...)):
+async def predict(
+    files: List[UploadFile] = File(...),
+    current_user = Depends(get_current_user_unified)
+):
     """
     Generate weather forecast from uploaded image
     """
@@ -315,6 +310,18 @@ async def predict(files: List[UploadFile] = File(...)):
         
         processing_time = time.time() - start_time
         
+        # Save forecast to MongoDB if user is authenticated
+        if current_user:
+            forecast_data = {
+                "location": "Generated",
+                "processing_time": processing_time,
+                "model_type": "Lightweight Weather CNN",
+                "accuracy": 87.5,
+                "generated_image": image_b64[:100] + "...",  # Store truncated version
+                "file_name": file.filename
+            }
+            await mongodb.create_forecast(current_user["id"], forecast_data)
+        
         return PredictionResponse(
             generated_image=image_b64,
             processing_time=processing_time,
@@ -332,23 +339,33 @@ async def predict(files: List[UploadFile] = File(...)):
 @app.get("/forecasts")
 async def get_forecasts(current_user = Depends(require_auth_unified)):
     """Get user's forecast history"""
+    forecasts = await mongodb.get_user_forecasts(current_user["id"])
+    
+    # Format for frontend
+    formatted_forecasts = []
+    for forecast in forecasts:
+        formatted_forecasts.append({
+            "id": forecast["id"],
+            "location": forecast.get("location", "Unknown"),
+            "created_at": forecast["created_at"].isoformat(),
+            "accuracy": forecast.get("accuracy", 87.5),
+            "status": "completed"
+        })
+    
     return {
-        "forecasts": [
-            {
-                "id": 1,
-                "location": "Mumbai",
-                "created_at": "2024-03-01T10:00:00Z",
-                "accuracy": 89.2,
-                "status": "completed"
-            },
-            {
-                "id": 2,
-                "location": "Delhi", 
-                "created_at": "2024-03-02T14:30:00Z",
-                "accuracy": 91.1,
-                "status": "completed"
-            }
-        ]
+        "forecasts": formatted_forecasts
+    }
+
+@app.get("/forecasts/{forecast_id}")
+async def get_forecast(forecast_id: str, current_user = Depends(require_auth_unified)):
+    """Get specific forecast"""
+    forecast = await mongodb.get_forecast_by_id(forecast_id, current_user["id"])
+    
+    if not forecast:
+        raise HTTPException(status_code=404, detail="Forecast not found")
+    
+    return {
+        "forecast": forecast
     }
 
 @app.get("/api/satellite/regions")
