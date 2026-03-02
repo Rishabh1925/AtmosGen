@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: atmosgen-backend
+    env: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$PORT
+    healthCheckPath: /health
+    envVars:
+      - key: USE_LIGHTWEIGHT_MODEL
+        value: "true"
+      - key: ENVIRONMENT
+        value: production
+      - key: PYTHON_VERSION
+        value: "3.11"
