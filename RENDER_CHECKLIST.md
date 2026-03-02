@@ -18,12 +18,13 @@
 3. Click **"New +"** → **"Web Service"**
 4. Connect your **AtmosGen** repository
 
-### Step 2: Configure Service
+### Step 2: Configure Service (Root Directory = backend)
 ```
 Name: atmosgen-backend
 Environment: Python 3
-Build Command: cd backend && pip install -r requirements.txt
-Start Command: cd backend && gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$PORT
+Root Directory: backend
+Build Command: pip install -r requirements.txt
+Start Command: gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$PORT
 ```
 
 ### Step 3: Environment Variables

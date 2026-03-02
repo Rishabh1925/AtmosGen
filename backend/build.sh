@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Render build script for AtmosGen
+# Render build script for AtmosGen (when root directory is backend)
 
 set -o errexit  # exit on error
 
