@@ -98,27 +98,31 @@ class ApiService {
 
   // Authentication
   async login(data: LoginData): Promise<{ success: boolean; user: User; message: string }> {
-    return this.request('/auth/login', {
+    const response = await this.request('/login', {
       method: 'POST',
       body: JSON.stringify(data),
     });
+    return { success: true, user: response.user, message: response.message };
   }
 
   async register(data: RegisterData): Promise<{ success: boolean; user: User; message: string }> {
-    return this.request('/auth/register', {
+    const response = await this.request('/register', {
       method: 'POST',
       body: JSON.stringify(data),
     });
+    return { success: true, user: response.user, message: response.message };
   }
 
   async logout(): Promise<{ success: boolean; message: string }> {
-    return this.request('/auth/logout', {
+    const response = await this.request('/logout', {
       method: 'POST',
     });
+    return { success: true, message: response.message };
   }
 
   async getCurrentUser(): Promise<{ success: boolean; user: User; message: string }> {
-    return this.request('/auth/me');
+    const response = await this.request('/me');
+    return { success: true, user: response.user, message: 'User retrieved' };
   }
 
   // Forecasts
@@ -130,20 +134,26 @@ class ApiService {
     generated_image: string;
     processing_time: number;
     message: string;
-    forecast_id: number;
+    forecast_id?: number;
   }> {
     const formData = new FormData();
     
     files.forEach((file) => {
       formData.append('files', file);
     });
-    formData.append('forecast_name', forecastName);
 
-    return this.request('/predict', {
+    const response = await this.request('/predict', {
       method: 'POST',
       headers: {}, // Remove Content-Type to let browser set it for FormData
       body: formData,
     });
+
+    return {
+      success: true,
+      generated_image: response.generated_image,
+      processing_time: response.processing_time,
+      message: response.message,
+    };
   }
 
   async getForecasts(): Promise<{
@@ -151,7 +161,12 @@ class ApiService {
     forecasts: ForecastItem[];
     message: string;
   }> {
-    return this.request('/forecasts');
+    const response = await this.request('/forecasts');
+    return {
+      success: true,
+      forecasts: response.forecasts || [],
+      message: 'Forecasts retrieved'
+    };
   }
 
   async getForecast(id: number): Promise<{
