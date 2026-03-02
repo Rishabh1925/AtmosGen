@@ -31,8 +31,10 @@ Start Command: gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.
 ```
 USE_LIGHTWEIGHT_MODEL = true
 ENVIRONMENT = production
-PYTHON_VERSION = 3.11
+PYTHON_VERSION = 3.11.0
 ```
+
+**Note:** Render also supports `runtime.txt` file (already included) for Python version.
 
 ### Step 4: Deploy!
 Click **"Create Web Service"** - Render will build and deploy automatically
