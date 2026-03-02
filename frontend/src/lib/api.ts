@@ -66,6 +66,31 @@ class ApiService {
     }
   }
 
+  // Generic HTTP methods
+  async get<T>(endpoint: string, options?: { params?: Record<string, any> }): Promise<{ data: T }> {
+    let url = endpoint;
+    if (options?.params) {
+      const searchParams = new URLSearchParams();
+      Object.entries(options.params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          searchParams.append(key, String(value));
+        }
+      });
+      url += `?${searchParams.toString()}`;
+    }
+    
+    const result = await this.request<T>(url);
+    return { data: result };
+  }
+
+  async post<T>(endpoint: string, data?: any): Promise<{ data: T }> {
+    const result = await this.request<T>(endpoint, {
+      method: 'POST',
+      body: data ? JSON.stringify(data) : undefined,
+    });
+    return { data: result };
+  }
+
   // Health check
   async checkHealth(): Promise<{ status: string; model_loaded: boolean }> {
     return this.request('/health');

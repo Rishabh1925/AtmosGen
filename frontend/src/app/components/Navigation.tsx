@@ -1,9 +1,11 @@
 import { Link } from 'react-router';
-import { Cloud, Moon, Sun } from 'lucide-react';
+import { Cloud, Moon, Sun, Satellite, History } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import { useAuth } from '../../lib/auth';
 
 export function Navigation() {
   const { theme, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200/50 dark:border-gray-700/50">
@@ -21,12 +23,32 @@ export function Navigation() {
             >
               Forecast
             </Link>
-            <Link
-              to="/dashboard"
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              Dashboard
-            </Link>
+            
+            {user && (
+              <>
+                <Link
+                  to="/satellite"
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <Satellite className="size-4" />
+                  Satellite Data
+                </Link>
+                <Link
+                  to="/history"
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <History className="size-4" />
+                  History
+                </Link>
+                <Link
+                  to="/dashboard"
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </>
+            )}
+            
             <Link
               to="/contact"
               className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -47,18 +69,34 @@ export function Navigation() {
               )}
             </button>
 
-            <Link
-              to="/login"
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Get Started
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <span className="text-gray-700 dark:text-gray-300">
+                  Welcome, {user.username}
+                </span>
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

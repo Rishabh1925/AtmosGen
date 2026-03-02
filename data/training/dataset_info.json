@@ -1,0 +1,687 @@
+{
+  "total_samples": 40,
+  "created_at": "2026-03-01T10:52:24.210810",
+  "description": "Synthetic weather sequences for AtmosGen training",
+  "samples": [
+    {
+      "pattern": [
+        "clear_sky",
+        "partly_cloudy",
+        "overcast",
+        "overcast"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0000_input_0.jpg",
+        "sample_0000_input_1.jpg",
+        "sample_0000_input_2.jpg"
+      ],
+      "target_file": "sample_0000_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 partly_cloudy \u2192 overcast \u2192 overcast",
+      "sample_id": "sample_0000"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "partly_cloudy",
+        "overcast",
+        "overcast"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0001_input_0.jpg",
+        "sample_0001_input_1.jpg",
+        "sample_0001_input_2.jpg"
+      ],
+      "target_file": "sample_0001_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 partly_cloudy \u2192 overcast \u2192 overcast",
+      "sample_id": "sample_0001"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "partly_cloudy",
+        "overcast",
+        "overcast"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0002_input_0.jpg",
+        "sample_0002_input_1.jpg",
+        "sample_0002_input_2.jpg"
+      ],
+      "target_file": "sample_0002_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 partly_cloudy \u2192 overcast \u2192 overcast",
+      "sample_id": "sample_0002"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "partly_cloudy",
+        "overcast",
+        "overcast"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0003_input_0.jpg",
+        "sample_0003_input_1.jpg",
+        "sample_0003_input_2.jpg"
+      ],
+      "target_file": "sample_0003_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 partly_cloudy \u2192 overcast \u2192 overcast",
+      "sample_id": "sample_0003"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "partly_cloudy",
+        "overcast",
+        "overcast"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0004_input_0.jpg",
+        "sample_0004_input_1.jpg",
+        "sample_0004_input_2.jpg"
+      ],
+      "target_file": "sample_0004_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 partly_cloudy \u2192 overcast \u2192 overcast",
+      "sample_id": "sample_0004"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "stormy",
+        "stormy"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0005_input_0.jpg",
+        "sample_0005_input_1.jpg",
+        "sample_0005_input_2.jpg"
+      ],
+      "target_file": "sample_0005_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 stormy \u2192 stormy",
+      "sample_id": "sample_0005"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "stormy",
+        "stormy"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0006_input_0.jpg",
+        "sample_0006_input_1.jpg",
+        "sample_0006_input_2.jpg"
+      ],
+      "target_file": "sample_0006_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 stormy \u2192 stormy",
+      "sample_id": "sample_0006"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "stormy",
+        "stormy"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0007_input_0.jpg",
+        "sample_0007_input_1.jpg",
+        "sample_0007_input_2.jpg"
+      ],
+      "target_file": "sample_0007_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 stormy \u2192 stormy",
+      "sample_id": "sample_0007"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "stormy",
+        "stormy"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0008_input_0.jpg",
+        "sample_0008_input_1.jpg",
+        "sample_0008_input_2.jpg"
+      ],
+      "target_file": "sample_0008_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 stormy \u2192 stormy",
+      "sample_id": "sample_0008"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "stormy",
+        "stormy"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0009_input_0.jpg",
+        "sample_0009_input_1.jpg",
+        "sample_0009_input_2.jpg"
+      ],
+      "target_file": "sample_0009_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 stormy \u2192 stormy",
+      "sample_id": "sample_0009"
+    },
+    {
+      "pattern": [
+        "stormy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0010_input_0.jpg",
+        "sample_0010_input_1.jpg",
+        "sample_0010_input_2.jpg"
+      ],
+      "target_file": "sample_0010_target.jpg",
+      "description": "Weather evolution: stormy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0010"
+    },
+    {
+      "pattern": [
+        "stormy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0011_input_0.jpg",
+        "sample_0011_input_1.jpg",
+        "sample_0011_input_2.jpg"
+      ],
+      "target_file": "sample_0011_target.jpg",
+      "description": "Weather evolution: stormy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0011"
+    },
+    {
+      "pattern": [
+        "stormy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0012_input_0.jpg",
+        "sample_0012_input_1.jpg",
+        "sample_0012_input_2.jpg"
+      ],
+      "target_file": "sample_0012_target.jpg",
+      "description": "Weather evolution: stormy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0012"
+    },
+    {
+      "pattern": [
+        "stormy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0013_input_0.jpg",
+        "sample_0013_input_1.jpg",
+        "sample_0013_input_2.jpg"
+      ],
+      "target_file": "sample_0013_target.jpg",
+      "description": "Weather evolution: stormy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0013"
+    },
+    {
+      "pattern": [
+        "stormy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0014_input_0.jpg",
+        "sample_0014_input_1.jpg",
+        "sample_0014_input_2.jpg"
+      ],
+      "target_file": "sample_0014_target.jpg",
+      "description": "Weather evolution: stormy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0014"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "stormy",
+        "hurricane",
+        "hurricane"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0015_input_0.jpg",
+        "sample_0015_input_1.jpg",
+        "sample_0015_input_2.jpg"
+      ],
+      "target_file": "sample_0015_target.jpg",
+      "description": "Weather evolution: overcast \u2192 stormy \u2192 hurricane \u2192 hurricane",
+      "sample_id": "sample_0015"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "stormy",
+        "hurricane",
+        "hurricane"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0016_input_0.jpg",
+        "sample_0016_input_1.jpg",
+        "sample_0016_input_2.jpg"
+      ],
+      "target_file": "sample_0016_target.jpg",
+      "description": "Weather evolution: overcast \u2192 stormy \u2192 hurricane \u2192 hurricane",
+      "sample_id": "sample_0016"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "stormy",
+        "hurricane",
+        "hurricane"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0017_input_0.jpg",
+        "sample_0017_input_1.jpg",
+        "sample_0017_input_2.jpg"
+      ],
+      "target_file": "sample_0017_target.jpg",
+      "description": "Weather evolution: overcast \u2192 stormy \u2192 hurricane \u2192 hurricane",
+      "sample_id": "sample_0017"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "stormy",
+        "hurricane",
+        "hurricane"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0018_input_0.jpg",
+        "sample_0018_input_1.jpg",
+        "sample_0018_input_2.jpg"
+      ],
+      "target_file": "sample_0018_target.jpg",
+      "description": "Weather evolution: overcast \u2192 stormy \u2192 hurricane \u2192 hurricane",
+      "sample_id": "sample_0018"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "stormy",
+        "hurricane",
+        "hurricane"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0019_input_0.jpg",
+        "sample_0019_input_1.jpg",
+        "sample_0019_input_2.jpg"
+      ],
+      "target_file": "sample_0019_target.jpg",
+      "description": "Weather evolution: overcast \u2192 stormy \u2192 hurricane \u2192 hurricane",
+      "sample_id": "sample_0019"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "clear_sky",
+        "partly_cloudy",
+        "partly_cloudy"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0020_input_0.jpg",
+        "sample_0020_input_1.jpg",
+        "sample_0020_input_2.jpg"
+      ],
+      "target_file": "sample_0020_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 clear_sky \u2192 partly_cloudy \u2192 partly_cloudy",
+      "sample_id": "sample_0020"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "clear_sky",
+        "partly_cloudy",
+        "partly_cloudy"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0021_input_0.jpg",
+        "sample_0021_input_1.jpg",
+        "sample_0021_input_2.jpg"
+      ],
+      "target_file": "sample_0021_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 clear_sky \u2192 partly_cloudy \u2192 partly_cloudy",
+      "sample_id": "sample_0021"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "clear_sky",
+        "partly_cloudy",
+        "partly_cloudy"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0022_input_0.jpg",
+        "sample_0022_input_1.jpg",
+        "sample_0022_input_2.jpg"
+      ],
+      "target_file": "sample_0022_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 clear_sky \u2192 partly_cloudy \u2192 partly_cloudy",
+      "sample_id": "sample_0022"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "clear_sky",
+        "partly_cloudy",
+        "partly_cloudy"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0023_input_0.jpg",
+        "sample_0023_input_1.jpg",
+        "sample_0023_input_2.jpg"
+      ],
+      "target_file": "sample_0023_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 clear_sky \u2192 partly_cloudy \u2192 partly_cloudy",
+      "sample_id": "sample_0023"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "clear_sky",
+        "partly_cloudy",
+        "partly_cloudy"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0024_input_0.jpg",
+        "sample_0024_input_1.jpg",
+        "sample_0024_input_2.jpg"
+      ],
+      "target_file": "sample_0024_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 clear_sky \u2192 partly_cloudy \u2192 partly_cloudy",
+      "sample_id": "sample_0024"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "overcast",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0025_input_0.jpg",
+        "sample_0025_input_1.jpg",
+        "sample_0025_input_2.jpg"
+      ],
+      "target_file": "sample_0025_target.jpg",
+      "description": "Weather evolution: overcast \u2192 overcast \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0025"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "overcast",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0026_input_0.jpg",
+        "sample_0026_input_1.jpg",
+        "sample_0026_input_2.jpg"
+      ],
+      "target_file": "sample_0026_target.jpg",
+      "description": "Weather evolution: overcast \u2192 overcast \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0026"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "overcast",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0027_input_0.jpg",
+        "sample_0027_input_1.jpg",
+        "sample_0027_input_2.jpg"
+      ],
+      "target_file": "sample_0027_target.jpg",
+      "description": "Weather evolution: overcast \u2192 overcast \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0027"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "overcast",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0028_input_0.jpg",
+        "sample_0028_input_1.jpg",
+        "sample_0028_input_2.jpg"
+      ],
+      "target_file": "sample_0028_target.jpg",
+      "description": "Weather evolution: overcast \u2192 overcast \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0028"
+    },
+    {
+      "pattern": [
+        "overcast",
+        "overcast",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0029_input_0.jpg",
+        "sample_0029_input_1.jpg",
+        "sample_0029_input_2.jpg"
+      ],
+      "target_file": "sample_0029_target.jpg",
+      "description": "Weather evolution: overcast \u2192 overcast \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0029"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0030_input_0.jpg",
+        "sample_0030_input_1.jpg",
+        "sample_0030_input_2.jpg"
+      ],
+      "target_file": "sample_0030_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0030"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0031_input_0.jpg",
+        "sample_0031_input_1.jpg",
+        "sample_0031_input_2.jpg"
+      ],
+      "target_file": "sample_0031_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0031"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0032_input_0.jpg",
+        "sample_0032_input_1.jpg",
+        "sample_0032_input_2.jpg"
+      ],
+      "target_file": "sample_0032_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0032"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0033_input_0.jpg",
+        "sample_0033_input_1.jpg",
+        "sample_0033_input_2.jpg"
+      ],
+      "target_file": "sample_0033_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0033"
+    },
+    {
+      "pattern": [
+        "partly_cloudy",
+        "overcast",
+        "partly_cloudy",
+        "clear_sky"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0034_input_0.jpg",
+        "sample_0034_input_1.jpg",
+        "sample_0034_input_2.jpg"
+      ],
+      "target_file": "sample_0034_target.jpg",
+      "description": "Weather evolution: partly_cloudy \u2192 overcast \u2192 partly_cloudy \u2192 clear_sky",
+      "sample_id": "sample_0034"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "stormy",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 0,
+      "input_files": [
+        "sample_0035_input_0.jpg",
+        "sample_0035_input_1.jpg",
+        "sample_0035_input_2.jpg"
+      ],
+      "target_file": "sample_0035_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 stormy \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0035"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "stormy",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 1,
+      "input_files": [
+        "sample_0036_input_0.jpg",
+        "sample_0036_input_1.jpg",
+        "sample_0036_input_2.jpg"
+      ],
+      "target_file": "sample_0036_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 stormy \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0036"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "stormy",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 2,
+      "input_files": [
+        "sample_0037_input_0.jpg",
+        "sample_0037_input_1.jpg",
+        "sample_0037_input_2.jpg"
+      ],
+      "target_file": "sample_0037_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 stormy \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0037"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "stormy",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 3,
+      "input_files": [
+        "sample_0038_input_0.jpg",
+        "sample_0038_input_1.jpg",
+        "sample_0038_input_2.jpg"
+      ],
+      "target_file": "sample_0038_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 stormy \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0038"
+    },
+    {
+      "pattern": [
+        "clear_sky",
+        "stormy",
+        "overcast",
+        "partly_cloudy"
+      ],
+      "variation": 4,
+      "input_files": [
+        "sample_0039_input_0.jpg",
+        "sample_0039_input_1.jpg",
+        "sample_0039_input_2.jpg"
+      ],
+      "target_file": "sample_0039_target.jpg",
+      "description": "Weather evolution: clear_sky \u2192 stormy \u2192 overcast \u2192 partly_cloudy",
+      "sample_id": "sample_0039"
+    }
+  ]
+}

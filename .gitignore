@@ -1,0 +1,68 @@
+# ---------------------------
+# Python
+# ---------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# ---------------------------
+# Node.js
+# ---------------------------
+node_modules/
+frontend/dist/
+
+# ---------------------------
+# Environment and secrets
+# ---------------------------
+.env
+.env.local
+.env.*.local
+
+# ---------------------------
+# Database and logs
+# ---------------------------
+*.db
+*.db-journal
+*.log
+
+# ---------------------------
+# IDE and editor files
+# ---------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------------------------
+# OS files
+# ---------------------------
+.DS_Store
+Thumbs.db
+
+# ---------------------------
+# Test and build artifacts
+# ---------------------------
+*.png
+!core_model/data/**/*.png
+!data/raw/**/*.png
+htmlcov/
+.coverage
+.pytest_cache/
+
+# ---------------------------
+# Model checkpoints (large)
+# ---------------------------
+# Uncomment the line below to exclude checkpoints from version control.
+# checkpoints/*.pth

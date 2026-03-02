@@ -1,0 +1,559 @@
+{
+  "dataset_name": "WeatherBench Sample Dataset",
+  "total_samples": 50,
+  "data_source": "Sample data mimicking WeatherBench structure",
+  "quality": "Demonstration quality (for testing pipeline)",
+  "note": "Use real WeatherBench data for production accuracy",
+  "samples": [
+    {
+      "sequence_id": 0,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_000_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_000_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_000_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_000_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 0"
+    },
+    {
+      "sequence_id": 1,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_001_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_001_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_001_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_001_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 1"
+    },
+    {
+      "sequence_id": 2,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_002_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_002_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_002_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_002_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 2"
+    },
+    {
+      "sequence_id": 3,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_003_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_003_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_003_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_003_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 3"
+    },
+    {
+      "sequence_id": 4,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_004_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_004_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_004_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_004_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 4"
+    },
+    {
+      "sequence_id": 5,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_005_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_005_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_005_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_005_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 5"
+    },
+    {
+      "sequence_id": 6,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_006_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_006_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_006_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_006_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 6"
+    },
+    {
+      "sequence_id": 7,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_007_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_007_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_007_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_007_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 7"
+    },
+    {
+      "sequence_id": 8,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_008_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_008_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_008_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_008_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 8"
+    },
+    {
+      "sequence_id": 9,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_009_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_009_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_009_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_009_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 9"
+    },
+    {
+      "sequence_id": 10,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_010_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_010_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_010_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_010_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 10"
+    },
+    {
+      "sequence_id": 11,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_011_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_011_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_011_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_011_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 11"
+    },
+    {
+      "sequence_id": 12,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_012_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_012_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_012_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_012_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 12"
+    },
+    {
+      "sequence_id": 13,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_013_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_013_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_013_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_013_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 13"
+    },
+    {
+      "sequence_id": 14,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_014_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_014_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_014_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_014_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 14"
+    },
+    {
+      "sequence_id": 15,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_015_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_015_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_015_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_015_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 15"
+    },
+    {
+      "sequence_id": 16,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_016_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_016_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_016_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_016_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 16"
+    },
+    {
+      "sequence_id": 17,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_017_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_017_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_017_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_017_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 17"
+    },
+    {
+      "sequence_id": 18,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_018_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_018_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_018_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_018_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 18"
+    },
+    {
+      "sequence_id": 19,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_019_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_019_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_019_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_019_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 19"
+    },
+    {
+      "sequence_id": 20,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_020_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_020_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_020_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_020_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 20"
+    },
+    {
+      "sequence_id": 21,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_021_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_021_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_021_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_021_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 21"
+    },
+    {
+      "sequence_id": 22,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_022_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_022_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_022_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_022_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 22"
+    },
+    {
+      "sequence_id": 23,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_023_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_023_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_023_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_023_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 23"
+    },
+    {
+      "sequence_id": 24,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_024_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_024_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_024_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_024_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 24"
+    },
+    {
+      "sequence_id": 25,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_025_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_025_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_025_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_025_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 25"
+    },
+    {
+      "sequence_id": 26,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_026_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_026_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_026_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_026_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 26"
+    },
+    {
+      "sequence_id": 27,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_027_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_027_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_027_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_027_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 27"
+    },
+    {
+      "sequence_id": 28,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_028_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_028_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_028_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_028_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 28"
+    },
+    {
+      "sequence_id": 29,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_029_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_029_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_029_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_029_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 29"
+    },
+    {
+      "sequence_id": 30,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_030_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_030_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_030_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_030_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 30"
+    },
+    {
+      "sequence_id": 31,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_031_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_031_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_031_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_031_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 31"
+    },
+    {
+      "sequence_id": 32,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_032_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_032_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_032_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_032_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 32"
+    },
+    {
+      "sequence_id": 33,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_033_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_033_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_033_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_033_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 33"
+    },
+    {
+      "sequence_id": 34,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_034_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_034_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_034_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_034_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 34"
+    },
+    {
+      "sequence_id": 35,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_035_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_035_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_035_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_035_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 35"
+    },
+    {
+      "sequence_id": 36,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_036_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_036_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_036_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_036_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 36"
+    },
+    {
+      "sequence_id": 37,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_037_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_037_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_037_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_037_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 37"
+    },
+    {
+      "sequence_id": 38,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_038_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_038_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_038_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_038_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 38"
+    },
+    {
+      "sequence_id": 39,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_039_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_039_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_039_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_039_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 39"
+    },
+    {
+      "sequence_id": 40,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_040_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_040_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_040_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_040_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 40"
+    },
+    {
+      "sequence_id": 41,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_041_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_041_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_041_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_041_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 41"
+    },
+    {
+      "sequence_id": 42,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_042_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_042_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_042_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_042_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 42"
+    },
+    {
+      "sequence_id": 43,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_043_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_043_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_043_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_043_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 43"
+    },
+    {
+      "sequence_id": 44,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_044_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_044_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_044_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_044_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 44"
+    },
+    {
+      "sequence_id": 45,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_045_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_045_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_045_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_045_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 45"
+    },
+    {
+      "sequence_id": 46,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_046_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_046_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_046_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_046_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 46"
+    },
+    {
+      "sequence_id": 47,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_047_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_047_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_047_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_047_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 47"
+    },
+    {
+      "sequence_id": 48,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_048_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_048_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_048_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_048_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 48"
+    },
+    {
+      "sequence_id": 49,
+      "input_files": [
+        "../data/weatherbench/processed_images/wb_sample_seq_049_t00.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_049_t01.jpg",
+        "../data/weatherbench/processed_images/wb_sample_seq_049_t02.jpg"
+      ],
+      "target_file": "../data/weatherbench/processed_images/wb_sample_seq_049_t03.jpg",
+      "variable": "temperature_sample",
+      "description": "WeatherBench-style sample sequence 49"
+    }
+  ]
+}

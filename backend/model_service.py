@@ -1,89 +1,136 @@
 import torch
+import torch.nn as nn
 import numpy as np
 import cv2
 import base64
 import io
+import os
 import time
 import logging
 from PIL import Image
 from typing import List, Dict, Any
 from fastapi import UploadFile
+import torchvision.transforms as transforms
 
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'core_model'))
-
-from models.unet import UNet
-from models.diffusion import Diffusion
-from config import Config
-from sampling import sample
+class SimpleWeatherNet(nn.Module):
+    """Simple CNN for weather forecasting - same architecture as trained model"""
+    def __init__(self):
+        super().__init__()
+        # Encoder
+        self.encoder = nn.Sequential(
+            nn.Conv2d(3, 64, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(64, 128, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2),
+            
+            nn.Conv2d(128, 256, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2),
+        )
+        
+        # Decoder
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(512, 256, 4, stride=2, padding=1),
+            nn.ReLU(),
+            nn.ConvTranspose2d(256, 128, 4, stride=2, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(128, 64, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(64, 3, 3, padding=1),
+            nn.Sigmoid()
+        )
+    
+    def forward(self, x):
+        encoded = self.encoder(x)
+        decoded = self.decoder(encoded)
+        return decoded
 
 class ModelService:
-    """Service for loading and running AtmosGen model inference"""
+    """Service for loading and running AtmosGen simple weather model"""
     
     def __init__(self):
         self.model = None
-        self.diffusion = None
-        self.config = None
         self.device = None
+        self.transform = None
         self.logger = logging.getLogger(__name__)
         self._loaded = False
         
     async def load_model(self):
-        """Load the trained model and initialize components"""
+        """Load the trained simple weather model"""
         try:
-            self.logger.info("Loading AtmosGen model...")
+            self.logger.info("Loading AtmosGen Simple Weather Model...")
             
-            # Initialize config
-            self.config = Config()
-            self.device = self.config.DEVICE
-            
+            # Set device
+            self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             self.logger.info(f"Using device: {self.device}")
             
             # Initialize model
-            self.model = UNet().to(self.device)
-            self.diffusion = Diffusion(self.config.TIMESTEPS)
+            self.model = SimpleWeatherNet().to(self.device)
             
-            # Load checkpoint if available
-            checkpoint_path = self._find_latest_checkpoint()
+            # Load trained weights
+            checkpoint_path = self._find_simple_checkpoint()
             if checkpoint_path:
                 self.logger.info(f"Loading checkpoint: {checkpoint_path}")
                 checkpoint = torch.load(checkpoint_path, map_location=self.device)
-                self.model.load_state_dict(checkpoint)
+                
+                if 'model_state_dict' in checkpoint:
+                    self.model.load_state_dict(checkpoint['model_state_dict'])
+                    if 'model_config' in checkpoint:
+                        config = checkpoint['model_config']
+                        self.logger.info(f"Model: {config.get('model_name', 'Unknown')}")
+                        self.logger.info(f"Training samples: {config.get('training_samples', 'Unknown')}")
+                        self.logger.info(f"Final loss: {config.get('final_loss', 'Unknown')}")
+                else:
+                    self.model.load_state_dict(checkpoint)
             else:
-                self.logger.warning("No checkpoint found, using randomly initialized model")
+                self.logger.warning("No simple model checkpoint found")
+                return False
             
             # Set model to evaluation mode
             self.model.eval()
+            
+            # Setup image transforms (same as training)
+            self.transform = transforms.Compose([
+                transforms.Resize((512, 512)),
+                transforms.ToTensor(),
+                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+            ])
             
             # Disable gradients for inference
             for param in self.model.parameters():
                 param.requires_grad = False
                 
             self._loaded = True
-            self.logger.info("Model loaded successfully")
+            self.logger.info("Simple weather model loaded successfully")
+            
+            # Log model info
+            param_count = sum(p.numel() for p in self.model.parameters())
+            self.logger.info(f"Model parameters: {param_count:,}")
+            
+            return True
             
         except Exception as e:
-            self.logger.error(f"Failed to load model: {e}")
+            self.logger.error(f"Failed to load simple model: {e}")
             raise
     
-    def _find_latest_checkpoint(self) -> str:
-        """Find the latest checkpoint file"""
+    def _find_simple_checkpoint(self) -> str:
+        """Find the simple weather model checkpoint"""
         checkpoint_dir = os.path.join(os.path.dirname(__file__), '..', 'checkpoints')
+        simple_checkpoint = os.path.join(checkpoint_dir, 'atmosgen_simple_v1.pth')
         
-        if not os.path.exists(checkpoint_dir):
-            return None
-            
-        checkpoints = [f for f in os.listdir(checkpoint_dir) if f.endswith('.pth')]
+        if os.path.exists(simple_checkpoint):
+            return simple_checkpoint
         
-        if not checkpoints:
-            return None
-            
-        # Sort by epoch number (assuming format: atmosgen_epoch_X.pth)
-        checkpoints.sort(key=lambda x: int(x.split('_')[-1].split('.')[0]))
-        latest = checkpoints[-1]
+        # Fallback to any available checkpoint
+        if os.path.exists(checkpoint_dir):
+            checkpoints = [f for f in os.listdir(checkpoint_dir) if f.endswith('.pth')]
+            if checkpoints:
+                return os.path.join(checkpoint_dir, checkpoints[0])
         
-        return os.path.join(checkpoint_dir, latest)
+        return None
     
     def is_loaded(self) -> bool:
         """Check if model is loaded and ready"""
@@ -91,10 +138,10 @@ class ModelService:
     
     async def predict(self, files: List[UploadFile]) -> Dict[str, Any]:
         """
-        Generate weather forecast from uploaded images
+        Generate weather forecast from uploaded image
         
         Args:
-            files: List of uploaded image files
+            files: List of uploaded image files (uses first image)
             
         Returns:
             Dictionary containing generated image and metadata
@@ -102,68 +149,50 @@ class ModelService:
         start_time = time.time()
         
         try:
-            # Process uploaded images
-            images = await self._process_uploaded_images(files)
+            if not files:
+                raise ValueError("No input files provided")
             
-            # Convert to tensor and add batch dimension
-            input_tensor = torch.stack(images).unsqueeze(0).to(self.device)
+            # Process the first uploaded image
+            input_image = await self._process_uploaded_image(files[0])
             
-            self.logger.info(f"Input tensor shape: {input_tensor.shape}")
+            self.logger.info(f"Input tensor shape: {input_image.shape}")
             
             # Generate prediction
             with torch.no_grad():
-                generated_frame = sample(
-                    self.model, 
-                    self.diffusion, 
-                    input_tensor, 
-                    self.device
-                )
+                prediction = self.model(input_image)
             
             # Convert result to base64 image
-            generated_image_b64 = self._tensor_to_base64(generated_frame[0])
+            generated_image_b64 = self._tensor_to_base64(prediction[0])
             
             processing_time = time.time() - start_time
             
             return {
                 "generated_image": generated_image_b64,
                 "processing_time": processing_time,
-                "input_sequence_length": len(files)
+                "input_sequence_length": 1,
+                "model_type": "Simple Weather CNN"
             }
             
         except Exception as e:
             self.logger.error(f"Prediction failed: {e}")
             raise
     
-    async def _process_uploaded_images(self, files: List[UploadFile]) -> List[torch.Tensor]:
-        """Process uploaded images into model input format"""
-        processed_images = []
+    async def _process_uploaded_image(self, file: UploadFile) -> torch.Tensor:
+        """Process uploaded image into model input format"""
+        # Read image data
+        image_data = await file.read()
         
-        for file in files:
-            # Read image data
-            image_data = await file.read()
-            
-            # Convert to PIL Image
-            image = Image.open(io.BytesIO(image_data))
-            
-            # Convert to RGB if needed
-            if image.mode != 'RGB':
-                image = image.convert('RGB')
-            
-            # Convert to numpy array
-            image_np = np.array(image)
-            
-            # Resize to model input size
-            image_resized = cv2.resize(image_np, (self.config.IMAGE_SIZE, self.config.IMAGE_SIZE))
-            
-            # Normalize to [0, 1]
-            image_normalized = image_resized.astype(np.float32) / 255.0
-            
-            # Convert to tensor (C, H, W)
-            image_tensor = torch.from_numpy(image_normalized).permute(2, 0, 1)
-            
-            processed_images.append(image_tensor)
+        # Convert to PIL Image
+        image = Image.open(io.BytesIO(image_data))
         
-        return processed_images
+        # Convert to RGB if needed
+        if image.mode != 'RGB':
+            image = image.convert('RGB')
+        
+        # Apply transforms and add batch dimension
+        image_tensor = self.transform(image).unsqueeze(0).to(self.device)
+        
+        return image_tensor
     
     def _tensor_to_base64(self, tensor: torch.Tensor) -> str:
         """Convert tensor to base64 encoded image"""

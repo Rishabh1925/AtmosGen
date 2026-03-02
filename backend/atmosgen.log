@@ -1,32 +1,184 @@
-2026-02-26 23:00:36,719 - main - INFO - Starting AtmosGen backend...
-2026-02-26 23:00:36,720 - model_service - INFO - Loading AtmosGen model...
-2026-02-26 23:00:36,720 - model_service - INFO - Using device: cpu
-2026-02-26 23:00:36,750 - model_service - WARNING - No checkpoint found, using randomly initialized model
-2026-02-26 23:00:36,750 - model_service - INFO - Model loaded successfully
-2026-02-26 23:00:36,751 - main - INFO - Model loaded successfully
-2026-02-26 23:00:36,798 - watchfiles.main - INFO - 3 changes detected
-2026-02-26 23:07:59,709 - main - INFO - Starting AtmosGen backend...
-2026-02-26 23:07:59,710 - model_service - INFO - Loading AtmosGen model...
-2026-02-26 23:07:59,710 - model_service - INFO - Using device: cpu
-2026-02-26 23:07:59,746 - model_service - WARNING - No checkpoint found, using randomly initialized model
-2026-02-26 23:07:59,746 - model_service - INFO - Model loaded successfully
-2026-02-26 23:07:59,746 - main - INFO - Model loaded successfully
-2026-02-27 00:28:13,938 - main - INFO - Processing prediction request with 3 images
-2026-02-27 00:28:14,159 - model_service - INFO - Input tensor shape: torch.Size([1, 3, 3, 128, 128])
-2026-02-27 00:28:44,307 - main - INFO - Prediction completed successfully
-2026-02-27 01:03:47,743 - main - INFO - Processing prediction request with 10 images
-2026-02-27 01:03:47,758 - model_service - INFO - Input tensor shape: torch.Size([1, 10, 3, 128, 128])
-2026-02-27 01:04:37,726 - main - INFO - Prediction completed successfully
-2026-02-27 01:33:59,185 - watchfiles.main - INFO - 2 changes detected
-2026-02-27 15:09:11,828 - main - INFO - Starting AtmosGen backend...
-2026-02-27 15:09:11,833 - database - INFO - Database initialized successfully
-2026-02-27 15:09:11,833 - main - INFO - Database initialized successfully
-2026-02-27 15:09:11,833 - model_service - INFO - Loading AtmosGen model...
-2026-02-27 15:09:11,833 - model_service - INFO - Using device: cpu
-2026-02-27 15:09:11,869 - model_service - WARNING - No checkpoint found, using randomly initialized model
-2026-02-27 15:09:11,869 - model_service - INFO - Model loaded successfully
-2026-02-27 15:09:11,869 - main - INFO - Model loaded successfully
-2026-02-27 15:09:11,915 - watchfiles.main - INFO - 6 changes detected
-2026-02-27 15:29:38,732 - database - INFO - User created successfully: testuser
-2026-02-27 15:29:38,735 - database - INFO - Session created for user 1
-2026-02-27 15:29:38,855 - watchfiles.main - INFO - 2 changes detected
+2026-03-02 09:52:56,318 - main - INFO - Starting AtmosGen backend...
+2026-03-02 09:52:56,323 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 09:52:56,323 - main - INFO - Supabase database connected successfully
+2026-03-02 09:52:56,323 - main - INFO - Satellite service initialized successfully
+2026-03-02 09:52:56,323 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 09:52:56,323 - model_service - INFO - Using device: cpu
+2026-03-02 09:52:56,337 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 09:52:56,352 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 09:52:56,352 - model_service - INFO - Training samples: 50
+2026-03-02 09:52:56,352 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 09:52:56,352 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 09:52:56,352 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 09:52:56,352 - main - INFO - Model loaded successfully
+2026-03-02 09:52:56,353 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 09:53:42,434 - main - INFO - Starting AtmosGen backend...
+2026-03-02 09:53:42,438 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 09:53:42,438 - main - INFO - Supabase database connected successfully
+2026-03-02 09:53:42,438 - main - INFO - Satellite service initialized successfully
+2026-03-02 09:53:42,438 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 09:53:42,438 - model_service - INFO - Using device: cpu
+2026-03-02 09:53:42,447 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 09:53:42,451 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 09:53:42,451 - model_service - INFO - Training samples: 50
+2026-03-02 09:53:42,451 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 09:53:42,451 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 09:53:42,451 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 09:53:42,452 - main - INFO - Model loaded successfully
+2026-03-02 09:53:42,452 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 09:54:12,651 - main - INFO - Starting AtmosGen backend...
+2026-03-02 09:54:12,655 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 09:54:12,655 - main - INFO - Supabase database connected successfully
+2026-03-02 09:54:12,655 - main - INFO - Satellite service initialized successfully
+2026-03-02 09:54:12,655 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 09:54:12,655 - model_service - INFO - Using device: cpu
+2026-03-02 09:54:12,665 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 09:54:12,670 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 09:54:12,670 - model_service - INFO - Training samples: 50
+2026-03-02 09:54:12,670 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 09:54:12,670 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 09:54:12,670 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 09:54:12,670 - main - INFO - Model loaded successfully
+2026-03-02 09:55:29,999 - auth_service - ERROR - Registration failed: timed out
+2026-03-02 09:57:23,518 - main - INFO - Starting AtmosGen backend...
+2026-03-02 09:57:23,523 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 09:57:23,523 - main - INFO - Supabase database connected successfully
+2026-03-02 09:57:23,523 - main - INFO - Satellite service initialized successfully
+2026-03-02 09:57:23,523 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 09:57:23,523 - model_service - INFO - Using device: cpu
+2026-03-02 09:57:23,533 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 09:57:23,545 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 09:57:23,545 - model_service - INFO - Training samples: 50
+2026-03-02 09:57:23,545 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 09:57:23,545 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 09:57:23,545 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 09:57:23,546 - main - INFO - Model loaded successfully
+2026-03-02 09:57:50,199 - main - INFO - Starting AtmosGen backend...
+2026-03-02 09:57:50,203 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 09:57:50,203 - main - INFO - Supabase database connected successfully
+2026-03-02 09:57:50,203 - main - INFO - Satellite service initialized successfully
+2026-03-02 09:57:50,203 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 09:57:50,203 - model_service - INFO - Using device: cpu
+2026-03-02 09:57:50,213 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 09:57:50,224 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 09:57:50,224 - model_service - INFO - Training samples: 50
+2026-03-02 09:57:50,224 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 09:57:50,225 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 09:57:50,225 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 09:57:50,225 - main - INFO - Model loaded successfully
+2026-03-02 09:57:50,225 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 09:59:49,775 - main - INFO - Starting AtmosGen backend...
+2026-03-02 09:59:49,780 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 09:59:49,780 - main - INFO - Supabase database connected successfully
+2026-03-02 09:59:49,780 - main - INFO - Satellite service initialized successfully
+2026-03-02 09:59:49,780 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 09:59:49,780 - model_service - INFO - Using device: cpu
+2026-03-02 09:59:49,789 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 09:59:49,801 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 09:59:49,801 - model_service - INFO - Training samples: 50
+2026-03-02 09:59:49,801 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 09:59:49,801 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 09:59:49,801 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 09:59:49,801 - main - INFO - Model loaded successfully
+2026-03-02 09:59:49,802 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 10:00:30,035 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:00:30,039 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 10:00:30,039 - main - INFO - Supabase database connected successfully
+2026-03-02 10:00:30,039 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:00:30,039 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:00:30,039 - model_service - INFO - Using device: cpu
+2026-03-02 10:00:30,049 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:00:30,061 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:00:30,061 - model_service - INFO - Training samples: 50
+2026-03-02 10:00:30,061 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:00:30,061 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:00:30,061 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:00:30,062 - main - INFO - Model loaded successfully
+2026-03-02 10:00:30,062 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 10:02:46,321 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:02:46,327 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 10:02:46,328 - main - INFO - Supabase database connected successfully
+2026-03-02 10:02:46,328 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:02:46,328 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:02:46,328 - model_service - INFO - Using device: cpu
+2026-03-02 10:02:46,343 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:02:46,356 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:02:46,356 - model_service - INFO - Training samples: 50
+2026-03-02 10:02:46,356 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:02:46,356 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:02:46,356 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:02:46,357 - main - INFO - Model loaded successfully
+2026-03-02 10:02:54,810 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:02:54,814 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 10:02:54,814 - main - INFO - Supabase database connected successfully
+2026-03-02 10:02:54,814 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:02:54,814 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:02:54,814 - model_service - INFO - Using device: cpu
+2026-03-02 10:02:54,823 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:02:54,829 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:02:54,829 - model_service - INFO - Training samples: 50
+2026-03-02 10:02:54,829 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:02:54,829 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:02:54,829 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:02:54,830 - main - INFO - Model loaded successfully
+2026-03-02 10:02:54,830 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 10:04:04,108 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:04:04,113 - supabase_client - INFO - Supabase client initialized successfully
+2026-03-02 10:04:04,113 - main - INFO - Supabase database connected successfully
+2026-03-02 10:04:04,113 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:04:04,113 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:04:04,113 - model_service - INFO - Using device: cpu
+2026-03-02 10:04:04,124 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:04:04,137 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:04:04,138 - model_service - INFO - Training samples: 50
+2026-03-02 10:04:04,138 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:04:04,138 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:04:04,138 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:04:04,138 - main - INFO - Model loaded successfully
+2026-03-02 10:05:42,687 - auth_service - ERROR - Registration failed: timed out
+2026-03-02 10:11:42,012 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:11:42,012 - supabase_client - WARNING - Supabase credentials not found. Using local SQLite fallback.
+2026-03-02 10:11:42,016 - sqlite_db - INFO - SQLite database initialized successfully
+2026-03-02 10:11:42,016 - main - INFO - Using SQLite database (local fallback)
+2026-03-02 10:11:42,016 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:11:42,016 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:11:42,016 - model_service - INFO - Using device: cpu
+2026-03-02 10:11:42,026 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:11:42,038 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:11:42,038 - model_service - INFO - Training samples: 50
+2026-03-02 10:11:42,038 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:11:42,039 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:11:42,039 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:11:42,039 - main - INFO - Model loaded successfully
+2026-03-02 10:12:30,342 - sqlite_db - ERROR - User creation failed: table users has no column named email_confirmed
+2026-03-02 10:12:55,626 - sqlite_db - ERROR - User creation failed: table users has no column named email_confirmed
+2026-03-02 10:16:10,201 - sqlite_db - ERROR - User creation failed: table users has no column named email_confirmed
+2026-03-02 10:16:25,883 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:16:25,883 - supabase_client - WARNING - Supabase credentials not found. Using local SQLite fallback.
+2026-03-02 10:16:25,884 - sqlite_db - INFO - SQLite database initialized successfully
+2026-03-02 10:16:25,884 - main - INFO - Using SQLite database (local fallback)
+2026-03-02 10:16:25,884 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:16:25,884 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:16:25,884 - model_service - INFO - Using device: cpu
+2026-03-02 10:16:25,894 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:16:25,905 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:16:25,906 - model_service - INFO - Training samples: 50
+2026-03-02 10:16:25,906 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:16:25,906 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:16:25,906 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:16:25,906 - main - INFO - Model loaded successfully
+2026-03-02 10:16:25,906 - main - INFO - Shutting down AtmosGen backend...
+2026-03-02 10:19:06,600 - main - INFO - Starting AtmosGen backend...
+2026-03-02 10:19:06,601 - supabase_client - WARNING - Supabase credentials not found. Using local SQLite fallback.
+2026-03-02 10:19:06,603 - sqlite_db - INFO - SQLite database initialized successfully
+2026-03-02 10:19:06,603 - main - INFO - Using SQLite database (local fallback)
+2026-03-02 10:19:06,604 - main - INFO - Satellite service initialized successfully
+2026-03-02 10:19:06,604 - model_service - INFO - Loading AtmosGen Simple Weather Model...
+2026-03-02 10:19:06,604 - model_service - INFO - Using device: cpu
+2026-03-02 10:19:06,613 - model_service - INFO - Loading checkpoint: /Users/rishabh/Documents/AtmosGen/AtmosGen/backend/../checkpoints/atmosgen_simple_v1.pth
+2026-03-02 10:19:06,623 - model_service - INFO - Model: AtmosGen Simple Weather Forecaster v1.0
+2026-03-02 10:19:06,624 - model_service - INFO - Training samples: 50
+2026-03-02 10:19:06,624 - model_service - INFO - Final loss: 0.3129133915901184
+2026-03-02 10:19:06,624 - model_service - INFO - Simple weather model loaded successfully
+2026-03-02 10:19:06,624 - model_service - INFO - Model parameters: 4,248,323
+2026-03-02 10:19:06,624 - main - INFO - Model loaded successfully
