@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from model_service import ModelService
+from lightweight_model import LightweightModelService
 from schemas import (
     PredictionResponse, HealthResponse, UserRegister, UserLogin, UserResponse, 
     ForecastResponse, ForecastListResponse, UserProfileUpdate, PasswordChange,
@@ -53,8 +54,15 @@ async def lifespan(app: FastAPI):
         satellite_service = SatelliteService()
         logger.info("Satellite service initialized successfully")
         
-        # Initialize model service
-        model_service = ModelService()
+        # Initialize model service (use lightweight for production deployment)
+        use_lightweight = os.getenv('USE_LIGHTWEIGHT_MODEL', 'false').lower() == 'true'
+        if use_lightweight:
+            model_service = LightweightModelService()
+            logger.info("Using lightweight model for deployment")
+        else:
+            model_service = ModelService()
+            logger.info("Using full model with checkpoints")
+        
         await model_service.load_model()
         logger.info("Model loaded successfully")
         yield
