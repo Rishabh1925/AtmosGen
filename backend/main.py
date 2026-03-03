@@ -112,7 +112,7 @@ app.add_middleware(
         "http://localhost:5173",
         "https://atmos-gen.vercel.app",
     ],
-    allow_origin_regex=r"https://.*\.(vercel\.app|netlify\.app|railway\.app|onrender\.com)",
+    allow_origin_regex=r"https://.*\.(vercel\.app|netlify\.app|railway\.app|onrender\.com|hf\.space)",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -409,5 +409,5 @@ async def internal_error_handler(request, exc):
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8000))
+    port = int(os.getenv("PORT", 7860))
     uvicorn.run(app, host="0.0.0.0", port=port)

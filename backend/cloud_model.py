@@ -123,7 +123,12 @@ class CloudModelService:
     
     def _find_checkpoint(self) -> Optional[str]:
         """Find the best cloud segmentation checkpoint."""
-        checkpoint_dir = os.path.join(os.path.dirname(__file__), '..', 'checkpoints')
+        # Check multiple directories (local dev, Render, HF Spaces)
+        checkpoint_dirs = [
+            os.path.join(os.path.dirname(__file__), '..', 'checkpoints'),
+            os.path.join(os.path.dirname(__file__), 'checkpoints'),
+            '/app/checkpoints',
+        ]
         
         # Priority order
         candidates = [
@@ -131,13 +136,14 @@ class CloudModelService:
             'cloud_seg_v1.pth',
         ]
         
-        for name in candidates:
-            path = os.path.join(checkpoint_dir, name)
-            if os.path.exists(path):
-                return path
-        
-        # Fallback: any cloud_seg checkpoint
-        if os.path.exists(checkpoint_dir):
+        for checkpoint_dir in checkpoint_dirs:
+            if not os.path.exists(checkpoint_dir):
+                continue
+            for name in candidates:
+                path = os.path.join(checkpoint_dir, name)
+                if os.path.exists(path):
+                    return path
+            # Fallback: any cloud_seg checkpoint
             for f in sorted(os.listdir(checkpoint_dir)):
                 if f.startswith('cloud_seg') and f.endswith('.pth'):
                     return os.path.join(checkpoint_dir, f)
