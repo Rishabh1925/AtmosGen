@@ -84,12 +84,8 @@ async def lifespan(app: FastAPI):
         else:
             logger.warning("MongoDB connection failed — auth/history features disabled")
 
-        # Load cloud segmentation model
-        model_loaded = await cloud_model.load_model()
-        if model_loaded:
-            logger.info("Cloud segmentation model loaded successfully")
-        else:
-            logger.warning("Cloud model failed to load — predictions will not work")
+        # Model loads lazily on first prediction request (avoids Gunicorn worker timeout)
+        logger.info("Cloud model will load on first prediction request (lazy loading)")
 
         yield
     except Exception as e:
@@ -282,11 +278,15 @@ async def predict(
 
     Returns cloud segmentation mask, coverage percentage, and visualization.
     """
+    # Lazy-load the model on first request
     if not cloud_model.is_loaded():
-        raise HTTPException(
-            status_code=503,
-            detail="Model not loaded. Please ensure checkpoint exists."
-        )
+        logger.info("First prediction request — loading cloud model now...")
+        loaded = await cloud_model.load_model()
+        if not loaded:
+            raise HTTPException(
+                status_code=503,
+                detail="Model failed to load. Please ensure checkpoint exists."
+            )
 
     try:
         if not files:

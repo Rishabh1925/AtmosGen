@@ -27,12 +27,16 @@ class CloudModelService:
     Model: U-Net with EfficientNet-B0 encoder (pre-trained on ImageNet).
     Task: Binary cloud segmentation from IR satellite imagery.
     Output: Cloud mask + cloud coverage percentage.
+    
+    Loading is lazy — the model is loaded on the first prediction request,
+    not during server startup, to avoid Gunicorn worker timeouts.
     """
     
     def __init__(self):
         self.model = None
         self.device = None
         self._loaded = False
+        self._loading = False
         self.model_info = {}
     
     async def load_model(self):
