@@ -3,19 +3,17 @@ Cloud Segmentation Model — Pre-trained U-Net with EfficientNet encoder.
 
 Fine-tuned on GOES-18 Band 13 IR satellite data for cloud detection.
 Uses segmentation-models-pytorch with ImageNet pre-trained encoder.
+
+NOTE: Heavy imports (torch, numpy, PIL, smp) are deferred to first use
+to avoid Gunicorn worker timeout during startup.
 """
 
-import torch
-import torch.nn as nn
-import numpy as np
 import base64
 import io
 import time
 import logging
 import os
-from PIL import Image
 from typing import Dict, Any, Optional
-from fastapi import UploadFile
 
 logger = logging.getLogger(__name__)
 
@@ -42,8 +40,8 @@ class CloudModelService:
     async def load_model(self):
         """Load the trained cloud segmentation model."""
         try:
+            import torch
             import segmentation_models_pytorch as smp
-            import torchvision.transforms as transforms
             
             logger.info("Loading Cloud Segmentation Model...")
             
@@ -160,6 +158,9 @@ class CloudModelService:
             - processing_time: inference time in seconds
             - model_info: model metadata
         """
+        import torch
+        import numpy as np
+        from PIL import Image
         import torchvision.transforms as transforms
         
         start_time = time.time()
@@ -224,8 +225,10 @@ class CloudModelService:
             "model_info": self.model_info,
         }
     
-    def _create_overlay(self, image: Image.Image, mask: np.ndarray, prob: np.ndarray) -> Image.Image:
+    def _create_overlay(self, image, mask, prob):
         """Create a visualization overlaying cloud mask on the satellite image."""
+        import numpy as np
+        from PIL import Image
         img_np = np.array(image).astype(np.float32)
         
         # Create colored overlay: clouds in blue-white, clear in transparent
@@ -246,15 +249,18 @@ class CloudModelService:
         overlay = np.clip(overlay, 0, 255).astype(np.uint8)
         return Image.fromarray(overlay)
     
-    def _array_to_base64(self, array: np.ndarray) -> str:
+    def _array_to_base64(self, array) -> str:
         """Convert a 2D numpy array (mask) to base64 PNG."""
+        import numpy as np
+        from PIL import Image
         img = Image.fromarray((array * 255).astype(np.uint8), mode='L')
         buffer = io.BytesIO()
         img.save(buffer, format='PNG')
         return base64.b64encode(buffer.getvalue()).decode('utf-8')
     
-    def _pil_to_base64(self, image: Image.Image) -> str:
+    def _pil_to_base64(self, image) -> str:
         """Convert PIL Image to base64 PNG."""
+        from PIL import Image
         buffer = io.BytesIO()
         image.save(buffer, format='PNG')
         return base64.b64encode(buffer.getvalue()).decode('utf-8')
