@@ -57,6 +57,7 @@ Thumbs.db
 *.png
 !core_model/data/**/*.png
 !data/raw/**/*.png
+!screenshots/**/*.png
 htmlcov/
 .coverage
 .pytest_cache/
