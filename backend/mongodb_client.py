@@ -22,11 +22,14 @@ class MongoDB:
     async def connect(self):
         """Connect to MongoDB"""
         try:
+            import certifi
+            
             # MongoDB connection string from environment
             mongodb_url = os.getenv('MONGODB_URL', 'mongodb://localhost:27017')
             db_name = os.getenv('MONGODB_DB', 'atmosgen')
             
-            self.client = AsyncIOMotorClient(mongodb_url)
+            # Use certifi CA bundle for SSL (required on Render/cloud platforms)
+            self.client = AsyncIOMotorClient(mongodb_url, tlsCAFile=certifi.where())
             self.db = self.client[db_name]
             
             # Collections
