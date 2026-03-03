@@ -15,7 +15,7 @@ Upload satellite images  get pixel-level cloud segmentation masks and coverage p
 
 <br />
 
-<img src="assets/landing.png" alt="AtmosGen Landing Page" width="800"/>
+<img src="screenshots/landing.png" alt="AtmosGen Landing Page" width="800"/>
 
 <br />
 
@@ -60,8 +60,8 @@ All predictions are stored per-user, enabling historical tracking and trend anal
 <td align="center"><strong>Analytics Dashboard</strong></td>
 </tr>
 <tr>
-<td><img src="assets/forecast.png" alt="Forecast Page" width="450"/></td>
-<td><img src="assets/dashboard.png" alt="Dashboard" width="450"/></td>
+<td><img src="screenshots/forecast.png" alt="Forecast Page" width="450"/></td>
+<td><img src="screenshots/dashboard.png" alt="Dashboard" width="450"/></td>
 </tr>
 </table>
 
@@ -255,7 +255,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-<div align="center">
+<div align="left">
 
 Built by [Rishabh](https://github.com/Rishabh1925)
 
