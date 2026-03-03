@@ -114,11 +114,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://*.vercel.app",
-        "https://*.netlify.app",
-        "https://*.railway.app",
-        "https://*.onrender.com"
+        "https://atmos-gen.vercel.app",
     ],
+    allow_origin_regex=r"https://.*\.(vercel\.app|netlify\.app|railway\.app|onrender\.com)",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -213,7 +211,7 @@ async def register(user_data: UserRegister):
         value=token,
         httponly=True,
         secure=True,
-        samesite="lax"
+        samesite="none"
     )
 
     return response
@@ -246,7 +244,7 @@ async def login(user_data: UserLogin):
         value=token,
         httponly=True,
         secure=True,
-        samesite="lax"
+        samesite="none"
     )
 
     return response
