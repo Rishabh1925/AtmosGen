@@ -124,9 +124,12 @@ export function LoginPage() {
         </div>
 
         <div className="mt-6 text-center">
-          <Link to="/" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-            ← Back to home
-          </Link>
+          <button
+            onClick={() => navigate(-1)}
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+          >
+            ← Back
+          </button>
         </div>
       </motion.div>
     </div>

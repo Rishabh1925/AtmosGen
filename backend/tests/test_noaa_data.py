@@ -169,17 +169,17 @@ async def test_model_with_noaa_data():
             
             if image:
                 processed_images.append((image, filename))
-                print(f"✓ Successfully processed: {filename}")
+                print(f" Successfully processed: {filename}")
             else:
-                print(f"✗ Failed to create image from: {filename}")
+                print(f" Failed to create image from: {filename}")
         else:
-            print(f"✗ Failed to load: {nc_file}")
+            print(f" Failed to load: {nc_file}")
     
     if len(processed_images) < 2:
-        print(f"\n❌ Need at least 2 images for model testing, got {len(processed_images)}")
+        print(f"\n Need at least 2 images for model testing, got {len(processed_images)}")
         return
     
-    print(f"\n🚀 Testing model with {len(processed_images)} processed images...")
+    print(f"\n Testing model with {len(processed_images)} processed images...")
     
     try:
         # Initialize model service
@@ -187,10 +187,10 @@ async def test_model_with_noaa_data():
         await model_service.load_model()
         
         if not model_service.is_loaded():
-            print("❌ Model failed to load")
+            print(" Model failed to load")
             return
         
-        print("✓ Model loaded successfully")
+        print(" Model loaded successfully")
         
         # Create mock upload files
         upload_files = []
@@ -198,18 +198,18 @@ async def test_model_with_noaa_data():
             upload_file = create_mock_upload_file(image, filename)
             upload_files.append(upload_file)
         
-        print(f"✓ Created {len(upload_files)} upload files")
+        print(f" Created {len(upload_files)} upload files")
         
         # Run prediction
-        print("\n🔮 Running model prediction...")
+        print("\n Running model prediction...")
         start_time = time.time()
         
         result = await model_service.predict(upload_files)
         
         processing_time = time.time() - start_time
         
-        print(f"✓ Prediction completed in {processing_time:.2f} seconds")
-        print(f"✓ Model processing time: {result['processing_time']:.2f} seconds")
+        print(f" Prediction completed in {processing_time:.2f} seconds")
+        print(f" Model processing time: {result['processing_time']:.2f} seconds")
         
         # Save the generated forecast
         if 'generated_image' in result:
@@ -225,13 +225,13 @@ async def test_model_with_noaa_data():
             with open(forecast_path, 'wb') as f:
                 f.write(forecast_bytes)
             
-            print(f"✓ Forecast saved: {forecast_path}")
+            print(f" Forecast saved: {forecast_path}")
             
             # Also create a summary image showing input sequence + forecast
             create_summary_image(processed_images, forecast_path, output_dir / "noaa_test_summary.jpg")
             
         print("\n" + "=" * 60)
-        print("🎉 MODEL TEST COMPLETED SUCCESSFULLY!")
+        print(" MODEL TEST COMPLETED SUCCESSFULLY!")
         print("=" * 60)
         print(f"Input files: {len(processed_images)} NOAA GOES-18 images")
         print(f"Processing time: {result['processing_time']:.2f} seconds")
@@ -241,7 +241,7 @@ async def test_model_with_noaa_data():
         return True
         
     except Exception as e:
-        print(f"\n❌ Model test failed: {e}")
+        print(f"\n Model test failed: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -272,7 +272,7 @@ def create_summary_image(input_images, forecast_path, output_path):
         plt.savefig(output_path, dpi=150, bbox_inches='tight')
         plt.close()
         
-        print(f"✓ Summary image saved: {output_path}")
+        print(f" Summary image saved: {output_path}")
         
     except Exception as e:
         print(f"Warning: Could not create summary image: {e}")

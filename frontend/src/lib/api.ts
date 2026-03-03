@@ -41,7 +41,7 @@ class ApiService {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`;
-    
+
     const config: RequestInit = {
       credentials: 'include', // Include cookies for session management
       headers: {
@@ -53,7 +53,7 @@ class ApiService {
 
     try {
       const response = await fetch(url, config);
-      
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(errorData.detail || `HTTP ${response.status}`);
@@ -78,7 +78,7 @@ class ApiService {
       });
       url += `?${searchParams.toString()}`;
     }
-    
+
     const result = await this.request<T>(url);
     return { data: result };
   }
@@ -132,12 +132,16 @@ class ApiService {
   ): Promise<{
     success: boolean;
     generated_image: string;
+    cloud_mask: string;
+    input_image: string;
+    cloud_coverage_pct: number;
     processing_time: number;
+    model_type: string;
     message: string;
     forecast_id?: number;
   }> {
     const formData = new FormData();
-    
+
     files.forEach((file) => {
       formData.append('files', file);
     });
@@ -151,7 +155,11 @@ class ApiService {
     return {
       success: true,
       generated_image: response.generated_image,
+      cloud_mask: response.cloud_mask || '',
+      input_image: response.input_image || '',
+      cloud_coverage_pct: response.cloud_coverage_pct || 0,
       processing_time: response.processing_time,
+      model_type: response.model_type || 'Cloud Segmentation',
       message: response.message,
     };
   }

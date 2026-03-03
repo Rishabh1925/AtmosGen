@@ -40,7 +40,7 @@ class WeatherBenchDownloader:
     def download_era5_sample(self, year=2020, variables=['temperature', 'geopotential']):
         """Download ERA5 sample data for training"""
         
-        print(f"📦 Downloading ERA5 data for {year}...")
+        print(f" Downloading ERA5 data for {year}...")
         
         # Create ERA5 directory
         era5_dir = self.output_dir / "era5" / str(year)
@@ -50,7 +50,7 @@ class WeatherBenchDownloader:
         
         for var_name in variables:
             if var_name not in self.variables:
-                print(f"⚠️  Unknown variable: {var_name}")
+                print(f"  Unknown variable: {var_name}")
                 continue
             
             var_code = self.variables[var_name]
@@ -61,12 +61,12 @@ class WeatherBenchDownloader:
             local_path = era5_dir / filename
             
             if local_path.exists():
-                print(f"✓ Already exists: {filename}")
+                print(f" Already exists: {filename}")
                 downloaded_files.append(str(local_path))
                 continue
             
             try:
-                print(f"⬇️  Downloading {var_name} ({var_code})...")
+                print(f"  Downloading {var_name} ({var_code})...")
                 
                 response = requests.get(file_url, stream=True)
                 
@@ -81,23 +81,23 @@ class WeatherBenchDownloader:
                                     pbar.update(len(chunk))
                     
                     downloaded_files.append(str(local_path))
-                    print(f"✅ Downloaded: {filename}")
+                    print(f" Downloaded: {filename}")
                     
                 else:
-                    print(f"❌ Failed to download {filename}: HTTP {response.status_code}")
+                    print(f" Failed to download {filename}: HTTP {response.status_code}")
             
             except Exception as e:
-                print(f"❌ Error downloading {var_name}: {e}")
+                print(f" Error downloading {var_name}: {e}")
         
         return downloaded_files
     
     def create_training_sequences(self, files, sequence_length=4, num_sequences=1000):
         """Create training sequences from WeatherBench data"""
         
-        print(f"🔄 Creating {num_sequences} training sequences...")
+        print(f" Creating {num_sequences} training sequences...")
         
         if not files:
-            print("❌ No files to process")
+            print(" No files to process")
             return []
         
         training_data = []
@@ -105,7 +105,7 @@ class WeatherBenchDownloader:
         # Process each NetCDF file
         for file_path in files:
             try:
-                print(f"📊 Processing: {os.path.basename(file_path)}")
+                print(f" Processing: {os.path.basename(file_path)}")
                 
                 # Load NetCDF data
                 ds = xr.open_dataset(file_path)
@@ -114,13 +114,13 @@ class WeatherBenchDownloader:
                 data_vars = [var for var in ds.data_vars if len(ds[var].dims) >= 3]
                 
                 if not data_vars:
-                    print(f"⚠️  No suitable variables in {file_path}")
+                    print(f"  No suitable variables in {file_path}")
                     continue
                 
                 main_var = data_vars[0]
                 data = ds[main_var]
                 
-                print(f"📈 Variable: {main_var}, Shape: {data.shape}")
+                print(f" Variable: {main_var}, Shape: {data.shape}")
                 
                 # Create temporal sequences
                 if 'time' in data.dims:
@@ -155,12 +155,12 @@ class WeatherBenchDownloader:
                                 training_data.append(sample_data)
                                 
                                 if len(training_data) % 100 == 0:
-                                    print(f"✓ Created {len(training_data)} sequences")
+                                    print(f" Created {len(training_data)} sequences")
                 
                 ds.close()
                 
             except Exception as e:
-                print(f"❌ Error processing {file_path}: {e}")
+                print(f" Error processing {file_path}: {e}")
                 continue
         
         return training_data
@@ -208,7 +208,7 @@ class WeatherBenchDownloader:
                 image_files.append(str(image_path))
                 
             except Exception as e:
-                print(f"❌ Error converting time step {t}: {e}")
+                print(f" Error converting time step {t}: {e}")
                 continue
         
         return image_files
@@ -216,14 +216,14 @@ class WeatherBenchDownloader:
     def create_production_dataset(self, num_sequences=1000):
         """Create a production-quality dataset"""
         
-        print("🚀 Creating production WeatherBench dataset...")
+        print(" Creating production WeatherBench dataset...")
         
         # Download essential variables
         variables = ['temperature', 'geopotential']
         files = self.download_era5_sample(2020, variables)
         
         if not files:
-            print("❌ No files downloaded, creating sample dataset...")
+            print(" No files downloaded, creating sample dataset...")
             return self.create_sample_dataset()
         
         # Create training sequences
@@ -245,16 +245,16 @@ class WeatherBenchDownloader:
         with open(self.output_dir / 'weatherbench_dataset_info.json', 'w') as f:
             json.dump(dataset_info, f, indent=2)
         
-        print(f"\n✅ WeatherBench dataset created!")
-        print(f"📊 Total samples: {len(training_data)}")
-        print(f"🎯 Quality: Production-grade for high accuracy")
+        print(f"\n WeatherBench dataset created!")
+        print(f" Total samples: {len(training_data)}")
+        print(f" Quality: Production-grade for high accuracy")
         
         return training_data
     
     def create_sample_dataset(self):
         """Create a sample dataset for demonstration"""
         
-        print("📝 Creating sample WeatherBench-style dataset...")
+        print(" Creating sample WeatherBench-style dataset...")
         
         # Create synthetic weather data that mimics WeatherBench structure
         from PIL import Image, ImageDraw
@@ -324,7 +324,7 @@ class WeatherBenchDownloader:
         with open(self.output_dir / 'weatherbench_dataset_info.json', 'w') as f:
             json.dump(dataset_info, f, indent=2)
         
-        print(f"✅ Sample dataset created: {len(training_data)} sequences")
+        print(f" Sample dataset created: {len(training_data)} sequences")
         return training_data
 
 def main():
@@ -358,16 +358,16 @@ def main():
         print("\n" + "=" * 60)
         print("WEATHERBENCH DATASET READY!")
         print("=" * 60)
-        print(f"✅ Created {len(training_data)} training sequences")
-        print(f"📁 Data location: {args.output_dir}")
-        print(f"🎯 Quality: {'Sample (testing)' if args.sample_only else 'Production (high accuracy)'}")
+        print(f" Created {len(training_data)} training sequences")
+        print(f" Data location: {args.output_dir}")
+        print(f" Quality: {'Sample (testing)' if args.sample_only else 'Production (high accuracy)'}")
         
         print("\nNext steps:")
         print("1. Package for Kaggle: python package_weatherbench.py")
         print("2. Train with high-accuracy dataset")
         print("3. Achieve state-of-the-art results!")
     else:
-        print("\n❌ Failed to create WeatherBench dataset")
+        print("\n Failed to create WeatherBench dataset")
 
 if __name__ == "__main__":
     main()

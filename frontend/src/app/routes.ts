@@ -8,8 +8,9 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { ForecastPage } from "./pages/ForecastPage";
 import { ForecastDetailPage } from "./pages/ForecastDetailPage";
 import { ForecastHistoryPage } from "./pages/ForecastHistoryPage";
-import { SatellitePage } from "./pages/SatellitePage";
+
 import { ContactPage } from "./pages/ContactPage";
+import { FAQPage } from "./pages/FAQPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 export const router = createBrowserRouter([
@@ -49,13 +50,14 @@ export const router = createBrowserRouter([
         path: "history",
         Component: ForecastHistoryPage,
       },
-      {
-        path: "satellite",
-        Component: SatellitePage,
-      },
+
       {
         path: "contact",
         Component: ContactPage,
+      },
+      {
+        path: "faq",
+        Component: FAQPage,
       },
       {
         path: "*",

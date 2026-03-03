@@ -81,17 +81,17 @@ def download_nasa_worldview_images():
                         f.write(response.content)
                     
                     downloaded_files.append(filepath)
-                    print(f"✓ Saved: {filename}")
+                    print(f" Saved: {filename}")
                 else:
-                    print(f"❌ Failed: {filename} (HTTP {response.status_code})")
+                    print(f" Failed: {filename} (HTTP {response.status_code})")
                 
                 # Be nice to the server
                 time.sleep(1)
                 
             except Exception as e:
-                print(f"❌ Error downloading {region['name']} {date_str}: {e}")
+                print(f" Error downloading {region['name']} {date_str}: {e}")
     
-    print(f"\n✓ Downloaded {len(downloaded_files)} diverse satellite images")
+    print(f"\n Downloaded {len(downloaded_files)} diverse satellite images")
     return downloaded_files
 
 def create_synthetic_weather_sequence():
@@ -179,9 +179,9 @@ def create_synthetic_weather_sequence():
         weather_img.save(filepath, quality=95)
         sequence_files.append(filepath)
         
-        print(f"✓ Created frame {frame + 1}/{total_frames}")
+        print(f" Created frame {frame + 1}/{total_frames}")
     
-    print(f"✓ Created synthetic weather sequence: {len(sequence_files)} frames")
+    print(f" Created synthetic weather sequence: {len(sequence_files)} frames")
     return sequence_files
 
 def main():
@@ -197,7 +197,7 @@ def main():
         nasa_files = download_nasa_worldview_images()
         all_files.extend(nasa_files)
     except Exception as e:
-        print(f"❌ NASA download failed: {e}")
+        print(f" NASA download failed: {e}")
         print("Continuing with synthetic data...")
     
     # Create synthetic weather sequence
@@ -205,12 +205,12 @@ def main():
         synthetic_files = create_synthetic_weather_sequence()
         all_files.extend(synthetic_files)
     except Exception as e:
-        print(f"❌ Synthetic data creation failed: {e}")
+        print(f" Synthetic data creation failed: {e}")
     
     print("\n" + "=" * 60)
     print("DOWNLOAD COMPLETE")
     print("=" * 60)
-    print(f"✓ Total files created: {len(all_files)}")
+    print(f" Total files created: {len(all_files)}")
     print("\nData locations:")
     print("- Real satellite data: ../data/diverse/")
     print("- Synthetic sequences: ../data/synthetic/")

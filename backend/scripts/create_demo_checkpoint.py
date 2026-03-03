@@ -60,13 +60,13 @@ def create_demo_checkpoint():
     # Save just the state dict (standard PyTorch format)
     torch.save(model.state_dict(), checkpoint_path)
     
-    print(f"✓ Demo checkpoint saved: {checkpoint_path}")
-    print(f"✓ Checkpoint size: {checkpoint_path.stat().st_size / 1024 / 1024:.1f} MB")
+    print(f" Demo checkpoint saved: {checkpoint_path}")
+    print(f" Checkpoint size: {checkpoint_path.stat().st_size / 1024 / 1024:.1f} MB")
     
     # Test loading the checkpoint
     test_model = UNet()
     test_model.load_state_dict(torch.load(checkpoint_path, map_location='cpu'))
-    print("✓ Checkpoint loads successfully")
+    print(" Checkpoint loads successfully")
     
     # Create a simple test to verify the model works
     # Model expects 5D input: (batch, sequence_length, channels, height, width)
@@ -77,8 +77,8 @@ def create_demo_checkpoint():
     with torch.no_grad():
         output = test_model(test_input, test_timestep)
     
-    print(f"✓ Model test successful - Output shape: {output.shape}")
-    print(f"✓ Output range: {output.min():.3f} to {output.max():.3f}")
+    print(f" Model test successful - Output shape: {output.shape}")
+    print(f" Output range: {output.min():.3f} to {output.max():.3f}")
     
     return checkpoint_path
 
@@ -97,7 +97,7 @@ def create_better_test_data():
     processed_files = sorted(glob.glob("../data/processed/OR_ABI*.jpg"))
     
     if not processed_files:
-        print("❌ No processed images found. Run test_noaa_data.py first.")
+        print(" No processed images found. Run test_noaa_data.py first.")
         return
     
     # Create variations directory
@@ -126,11 +126,11 @@ def create_better_test_data():
             output_path = variations_dir / f"weather_variation_{i:02d}_{name}.jpg"
             transformed.save(output_path, quality=95)
             created_files.append(output_path)
-            print(f"✓ Created: {name}")
+            print(f" Created: {name}")
         except Exception as e:
-            print(f"❌ Failed to create {name}: {e}")
+            print(f" Failed to create {name}: {e}")
     
-    print(f"✓ Created {len(created_files)} test variations")
+    print(f" Created {len(created_files)} test variations")
     return created_files
 
 if __name__ == "__main__":
@@ -147,8 +147,8 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("SETUP COMPLETE!")
     print("=" * 60)
-    print(f"✓ Demo checkpoint: {checkpoint_path}")
-    print(f"✓ Test variations: {len(test_files) if test_files else 0} files")
+    print(f" Demo checkpoint: {checkpoint_path}")
+    print(f" Test variations: {len(test_files) if test_files else 0} files")
     print("\nNext steps:")
     print("1. Run: python test_noaa_data.py")
     print("2. Check results in ../data/processed/")

@@ -13,18 +13,18 @@ import json
 def integrate_high_accuracy_model():
     """Integrate the high-accuracy trained model"""
     
-    print("🔄 Integrating high-accuracy AtmosGen model...")
+    print(" Integrating high-accuracy AtmosGen model...")
     
     # Look for high-accuracy checkpoint
     checkpoint_zip = Path("atmosgen_high_accuracy_model.zip")
     
     if not checkpoint_zip.exists():
-        print("❌ High-accuracy checkpoint not found!")
+        print(" High-accuracy checkpoint not found!")
         print("Please download 'atmosgen_high_accuracy_model.zip' from Kaggle")
         return False
     
     # Extract to high-accuracy directory
-    print("📦 Extracting high-accuracy model...")
+    print(" Extracting high-accuracy model...")
     checkpoint_dir = Path("../checkpoints/atmosgen_high_accuracy")
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     
@@ -36,16 +36,16 @@ def integrate_high_accuracy_model():
     
     for required_file in required_files:
         if not (checkpoint_dir / required_file).exists():
-            print(f"❌ Missing high-accuracy file: {required_file}")
+            print(f" Missing high-accuracy file: {required_file}")
             return False
     
-    print("✅ High-accuracy model extracted successfully!")
+    print(" High-accuracy model extracted successfully!")
     
     # Load high-accuracy config
     with open(checkpoint_dir / 'high_accuracy_config.json', 'r') as f:
         config = json.load(f)
     
-    print(f"📊 High-accuracy model info:")
+    print(f" High-accuracy model info:")
     print(f"   - Model: {config['model_name']}")
     print(f"   - Training data: {config['training_data']}")
     print(f"   - Samples: {config['training_samples']}")
@@ -54,17 +54,17 @@ def integrate_high_accuracy_model():
     print(f"   - Accuracy improvement: {config['accuracy_improvement']}")
     
     # Update model service priority
-    print("🔧 Updating model service for high accuracy...")
+    print(" Updating model service for high accuracy...")
     
     # The model service will automatically use the high-accuracy model
     # because it has the highest priority
     
-    print("✅ High-accuracy integration complete!")
+    print(" High-accuracy integration complete!")
     print("\nHigh-accuracy model features:")
-    print("✅ Trained on 50 diverse weather sequences")
-    print("✅ 5.5x more training data diversity")
-    print("✅ Improved accuracy and generalization")
-    print("✅ Professional resume-quality project")
+    print(" Trained on 50 diverse weather sequences")
+    print(" 5.5x more training data diversity")
+    print(" Improved accuracy and generalization")
+    print(" Professional resume-quality project")
     
     print("\nNext steps:")
     print("1. Test: python test_high_accuracy_model.py")

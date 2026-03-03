@@ -64,5 +64,5 @@ htmlcov/
 # ---------------------------
 # Model checkpoints (large)
 # ---------------------------
-# Uncomment the line below to exclude checkpoints from version control.
-# checkpoints/*.pth
+# Model checkpoints are too large for GitHub
+checkpoints/*.pth

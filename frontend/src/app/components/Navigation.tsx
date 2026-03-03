@@ -1,11 +1,25 @@
 import { Link } from 'react-router';
-import { Cloud, Moon, Sun, Satellite, History } from 'lucide-react';
+import { Cloud, Moon, Sun, ChevronDown, LogOut, User } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { useAuth } from '../../lib/auth';
+import { useState, useRef, useEffect } from 'react';
 
 export function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const { user, logout } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200/50 dark:border-gray-700/50">
@@ -23,32 +37,20 @@ export function Navigation() {
             >
               Forecast
             </Link>
-            
-            {user && (
-              <>
-                <Link
-                  to="/satellite"
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <Satellite className="size-4" />
-                  Satellite Data
-                </Link>
-                <Link
-                  to="/history"
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <History className="size-4" />
-                  History
-                </Link>
-                <Link
-                  to="/dashboard"
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  Dashboard
-                </Link>
-              </>
-            )}
-            
+
+            <Link
+              to={user ? "/history" : "/login"}
+              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              History
+            </Link>
+            <Link
+              to={user ? "/dashboard" : "/login"}
+              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              Dashboard
+            </Link>
+
             <Link
               to="/contact"
               className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -70,16 +72,30 @@ export function Navigation() {
             </button>
 
             {user ? (
-              <div className="flex items-center gap-4">
-                <span className="text-gray-700 dark:text-gray-300">
-                  Welcome, {user.username}
-                </span>
+              <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={logout}
-                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
                 >
-                  Logout
+                  <User className="size-4" />
+                  <span>{user.username}</span>
+                  <ChevronDown className={`size-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
+
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50">
+                    <button
+                      onClick={() => {
+                        logout();
+                        setDropdownOpen(false);
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <LogOut className="size-4" />
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <>

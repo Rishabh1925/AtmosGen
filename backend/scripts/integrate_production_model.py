@@ -13,18 +13,18 @@ import json
 def integrate_production_model():
     """Integrate the production-trained model"""
     
-    print("🔄 Integrating production AtmosGen model...")
+    print(" Integrating production AtmosGen model...")
     
     # Look for production checkpoint
     checkpoint_zip = Path("atmosgen_production_checkpoint.zip")
     
     if not checkpoint_zip.exists():
-        print("❌ Production checkpoint not found!")
+        print(" Production checkpoint not found!")
         print("Please download 'atmosgen_production_checkpoint.zip' from Kaggle")
         return False
     
     # Extract to production directory
-    print("📦 Extracting production model...")
+    print(" Extracting production model...")
     checkpoint_dir = Path("../checkpoints/atmosgen_production")
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     
@@ -36,16 +36,16 @@ def integrate_production_model():
     
     for required_file in required_files:
         if not (checkpoint_dir / required_file).exists():
-            print(f"❌ Missing production file: {required_file}")
+            print(f" Missing production file: {required_file}")
             return False
     
-    print("✅ Production model extracted successfully!")
+    print(" Production model extracted successfully!")
     
     # Load production config
     with open(checkpoint_dir / 'production_model_config.json', 'r') as f:
         config = json.load(f)
     
-    print(f"📊 Production model info:")
+    print(f" Production model info:")
     print(f"   - Model: {config['model_type']}")
     print(f"   - Training data: {config['training_data']}")
     print(f"   - Samples: {config['training_samples']}")
@@ -54,17 +54,17 @@ def integrate_production_model():
     print(f"   - Accuracy: {config['model_accuracy']}")
     
     # Update model service priority
-    print("🔧 Updating model service for production...")
+    print(" Updating model service for production...")
     
     # The model service will automatically use the production model
     # because it has higher priority than demo models
     
-    print("✅ Production integration complete!")
+    print(" Production integration complete!")
     print("\nProduction model features:")
-    print("✅ Trained on real NOAA satellite data")
-    print("✅ Production-grade meteorological accuracy")
-    print("✅ Professional weather forecasting quality")
-    print("✅ Resume-worthy project results")
+    print(" Trained on real NOAA satellite data")
+    print(" Production-grade meteorological accuracy")
+    print(" Professional weather forecasting quality")
+    print(" Resume-worthy project results")
     
     print("\nNext steps:")
     print("1. Test: python test_production_model.py")

@@ -348,25 +348,25 @@ def main():
     end_date = datetime.now()
     start_date = end_date - timedelta(days=90)
     
-    print(f"🛰️ Starting MOSDAC data download from {start_date} to {end_date}")
+    print(f" Starting MOSDAC data download from {start_date} to {end_date}")
     
     # Download satellite data
     file_paths = pipeline.download_satellite_data(start_date, end_date)
-    print(f"📥 Downloaded {len(file_paths)} files")
+    print(f" Downloaded {len(file_paths)} files")
     
     # Process imagery
     processed_data = pipeline.process_satellite_imagery(file_paths)
-    print(f"🔄 Processed {len(processed_data['images'])} images")
+    print(f" Processed {len(processed_data['images'])} images")
     
     # Create training sequences
     sequences = pipeline.create_training_sequences(processed_data)
-    print(f"📊 Created {len(sequences['inputs'])} training sequences")
+    print(f" Created {len(sequences['inputs'])} training sequences")
     
     # Save training data
     pipeline.save_training_data(sequences, "data/mosdac_training_data.npz")
-    print("✅ Training data ready!")
+    print(" Training data ready!")
     
-    print("\n🚀 Ready to train production weather model with real satellite data!")
+    print("\n Ready to train production weather model with real satellite data!")
 
 if __name__ == "__main__":
     main()

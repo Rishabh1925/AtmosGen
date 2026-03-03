@@ -79,10 +79,6 @@ export function LandingPage() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-16 flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-500"
         >
-          <Link to="/dashboard" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-            Dashboard
-          </Link>
-          <span>•</span>
           <Link to="/login" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
             Sign In
           </Link>

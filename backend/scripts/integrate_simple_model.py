@@ -61,7 +61,7 @@ def integrate_simple_model():
     model_zip_path = "../atmosgen_simple_model.zip"
     if not os.path.exists(model_zip_path):
         print(" Error: atmosgen_simple_model.zip not found!")
-        print("📥 Please download it from Kaggle and place it in the project root directory")
+        print(" Please download it from Kaggle and place it in the project root directory")
         return False
     
     # Extract the model
@@ -90,7 +90,7 @@ def integrate_simple_model():
     # Load trained weights
     model_path = os.path.join(extract_dir, "weather_model.pth")
     if os.path.exists(model_path):
-        print("📥 Loading trained weights...")
+        print(" Loading trained weights...")
         model.load_state_dict(torch.load(model_path, map_location='cpu'))
         print(" Model weights loaded successfully!")
     else:

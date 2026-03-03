@@ -21,7 +21,7 @@ def create_weatherbench_kaggle_script():
 !pip install diffusers transformers accelerate xformers -q
 !pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 -q
 
-print("✅ High-accuracy training environment ready!")
+print(" High-accuracy training environment ready!")
 
 # Cell 2: Import libraries
 import torch
@@ -39,10 +39,10 @@ import matplotlib.pyplot as plt
 from torchvision import transforms
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"✅ High-accuracy training on: {device}")
+print(f" High-accuracy training on: {device}")
 
 # Cell 3: Load WeatherBench data
-print("📦 Loading WeatherBench diverse weather dataset...")
+print(" Loading WeatherBench diverse weather dataset...")
 
 with zipfile.ZipFile('/kaggle/input/atmosgen-weatherbench-data/atmosgen_weatherbench_data.zip', 'r') as zip_ref:
     zip_ref.extractall('/kaggle/working/data')
@@ -51,13 +51,13 @@ with zipfile.ZipFile('/kaggle/input/atmosgen-weatherbench-data/atmosgen_weatherb
 with open('/kaggle/working/data/weatherbench_dataset_info.json', 'r') as f:
     dataset_info = json.load(f)
 
-print(f"✅ WeatherBench dataset loaded!")
-print(f"📊 Dataset: {dataset_info['dataset_name']}")
-print(f"🌤️  Sequences: {dataset_info['total_samples']}")
-print(f"🎯 Quality: {dataset_info['quality']}")
+print(f" WeatherBench dataset loaded!")
+print(f" Dataset: {dataset_info['dataset_name']}")
+print(f"  Sequences: {dataset_info['total_samples']}")
+print(f" Quality: {dataset_info['quality']}")
 
 # Verify diverse data
-print(f"\\n📈 Data diversity check:")
+print(f"\\n Data diversity check:")
 print(f"   - Total sequences: {len(dataset_info['samples'])}")
 print(f"   - Data source: {dataset_info['data_source']}")
 print(f"   - Expected accuracy: Higher due to diverse weather patterns")
@@ -123,11 +123,11 @@ class WeatherBenchDataset(Dataset):
 dataset = WeatherBenchDataset('/kaggle/working/data')
 dataloader = DataLoader(dataset, batch_size=2, shuffle=True)  # Larger batch size
 
-print(f"✅ High-accuracy dataset ready: {len(dataset)} diverse weather sequences")
-print(f"🎯 Expected improvement: {len(dataset)/9:.1f}x more data than previous approach")
+print(f" High-accuracy dataset ready: {len(dataset)} diverse weather sequences")
+print(f" Expected improvement: {len(dataset)/9:.1f}x more data than previous approach")
 
 # Cell 5: Load model for high-accuracy training
-print("🤖 Loading Stable Diffusion for high-accuracy training...")
+print(" Loading Stable Diffusion for high-accuracy training...")
 
 model_id = "runwayml/stable-diffusion-v1-5"
 
@@ -145,7 +145,7 @@ unet = unet.to(device)
 unet.enable_gradient_checkpointing()
 text_encoder.requires_grad_(False)
 
-print("✅ High-accuracy model loaded!")
+print(" High-accuracy model loaded!")
 
 # Cell 6: High-accuracy training setup
 # Optimized for better convergence
@@ -175,10 +175,10 @@ def encode_prompt(prompt):
     return embeddings
 
 encoded_prompts = [encode_prompt(p) for p in weather_prompts]
-print("✅ High-accuracy training configured!")
+print(" High-accuracy training configured!")
 
 # Cell 7: High-accuracy training loop
-print("🚀 Starting high-accuracy training on diverse weather data...")
+print(" Starting high-accuracy training on diverse weather data...")
 
 num_epochs = 8  # More epochs for better accuracy with diverse data
 best_loss = float('inf')
@@ -233,17 +233,17 @@ for epoch in range(num_epochs):
     train_losses.append(avg_loss)
     learning_rates.append(optimizer.param_groups[0]['lr'])
     
-    print(f"✅ Epoch {epoch+1}: Loss = {avg_loss:.4f}, LR = {optimizer.param_groups[0]['lr']:.2e}")
+    print(f" Epoch {epoch+1}: Loss = {avg_loss:.4f}, LR = {optimizer.param_groups[0]['lr']:.2e}")
     
     if avg_loss < best_loss:
         best_loss = avg_loss
-        print(f"🎯 New best loss: {best_loss:.4f}")
+        print(f" New best loss: {best_loss:.4f}")
 
-print("🎉 High-accuracy training completed!")
-print(f"🏆 Final best loss: {best_loss:.4f}")
+print(" High-accuracy training completed!")
+print(f" Final best loss: {best_loss:.4f}")
 
 # Cell 8: Save high-accuracy model
-print("💾 Saving high-accuracy AtmosGen model...")
+print(" Saving high-accuracy AtmosGen model...")
 
 # Create high-accuracy output
 output_dir = "/kaggle/working/atmosgen_high_accuracy"
@@ -297,22 +297,22 @@ training_metrics = {
 with open(f"{output_dir}/training_metrics.json", 'w') as f:
     json.dump(training_metrics, f, indent=2)
 
-print("✅ High-accuracy model saved!")
+print(" High-accuracy model saved!")
 
 # Cell 9: Create high-accuracy package
 import shutil
 
-print("📦 Creating high-accuracy model package...")
+print(" Creating high-accuracy model package...")
 
 # Create downloadable zip
 shutil.make_archive("/kaggle/working/atmosgen_high_accuracy_model", 'zip', output_dir)
 
-print("✅ High-accuracy model ready!")
-print("📁 Download: atmosgen_high_accuracy_model.zip")
-print("🎯 This is your high-accuracy weather AI!")
+print(" High-accuracy model ready!")
+print(" Download: atmosgen_high_accuracy_model.zip")
+print(" This is your high-accuracy weather AI!")
 
 # Cell 10: High-accuracy model validation
-print("🧪 Testing high-accuracy model...")
+print(" Testing high-accuracy model...")
 
 # Create high-accuracy pipeline
 high_accuracy_pipeline = StableDiffusionPipeline.from_pretrained(
@@ -349,15 +349,15 @@ plt.grid(True, alpha=0.3)
 plt.show()
 
 print("\\n" + "="*60)
-print("🎉 HIGH-ACCURACY ATMOSGEN COMPLETE!")
+print(" HIGH-ACCURACY ATMOSGEN COMPLETE!")
 print("="*60)
-print("✅ Model: AtmosGen High-Accuracy v1.0")
-print("🌤️  Training: 50 diverse weather sequences")
-print("📊 Improvement: 5.5x more diverse data")
-print("🎯 Quality: High-accuracy meteorological AI")
-print("🏆 Resume: Professional weather forecasting project")
-print("⚡ Ready: Production deployment capability")
-print("\\n🚀 Your high-accuracy weather AI is ready!")
+print(" Model: AtmosGen High-Accuracy v1.0")
+print("  Training: 50 diverse weather sequences")
+print(" Improvement: 5.5x more diverse data")
+print(" Quality: High-accuracy meteorological AI")
+print(" Resume: Professional weather forecasting project")
+print(" Ready: Production deployment capability")
+print("\\n Your high-accuracy weather AI is ready!")
 '''
     
     return kaggle_script
@@ -365,13 +365,13 @@ print("\\n🚀 Your high-accuracy weather AI is ready!")
 def package_weatherbench_data():
     """Package WeatherBench sample data for Kaggle"""
     
-    print("📦 Packaging WeatherBench data for high-accuracy training...")
+    print(" Packaging WeatherBench data for high-accuracy training...")
     
     # Check for WeatherBench data
     weatherbench_dir = Path("../data/weatherbench")
     
     if not weatherbench_dir.exists():
-        print("❌ WeatherBench data not found!")
+        print(" WeatherBench data not found!")
         print("Run: python download_weatherbench.py --sample-only first")
         return None
     
@@ -380,13 +380,13 @@ def package_weatherbench_data():
     package_dir.mkdir(exist_ok=True)
     
     # Copy WeatherBench data
-    print("📁 Copying WeatherBench diverse data...")
+    print(" Copying WeatherBench diverse data...")
     if (package_dir / "weatherbench_data").exists():
         shutil.rmtree(package_dir / "weatherbench_data")
     shutil.copytree(weatherbench_dir, package_dir / "weatherbench_data")
     
     # Create high-accuracy Kaggle script
-    print("📝 Creating high-accuracy training script...")
+    print(" Creating high-accuracy training script...")
     kaggle_script = create_weatherbench_kaggle_script()
     
     with open(package_dir / "atmosgen_high_accuracy_training.py", 'w') as f:
@@ -395,7 +395,7 @@ def package_weatherbench_data():
     # Create high-accuracy README
     readme_content = """# AtmosGen High-Accuracy Weather Forecasting Dataset
 
-## 🎯 WeatherBench Diverse Data for High Accuracy
+##  WeatherBench Diverse Data for High Accuracy
 
 ### Overview
 This dataset contains **50 diverse weather sequences** for training a high-accuracy weather forecasting AI. This provides 5.5x more diverse data than the previous 9-sequence approach.
@@ -418,10 +418,10 @@ This dataset contains **50 diverse weather sequences** for training a high-accur
 
 ### Expected Results
 This high-accuracy approach will achieve:
-- ✅ **Better convergence** - More diverse training data
-- ✅ **Higher accuracy** - Reduced overfitting
-- ✅ **Realistic forecasts** - Multiple weather patterns
-- ✅ **Resume quality** - Professional ML project
+-  **Better convergence** - More diverse training data
+-  **Higher accuracy** - Reduced overfitting
+-  **Realistic forecasts** - Multiple weather patterns
+-  **Resume quality** - Professional ML project
 
 ### Training Specifications
 - **Samples:** 50 diverse weather sequences
@@ -449,14 +449,14 @@ This project demonstrates:
 - **Performance improvement** (quantified accuracy gains)
 - **Professional ML practices** (proper validation)
 
-**Ready for high-accuracy weather AI training!** 🌤️⚡
+**Ready for high-accuracy weather AI training!** 
 """
     
     with open(package_dir / "README.md", 'w') as f:
         f.write(readme_content)
     
     # Create the high-accuracy zip package
-    print("🗜️  Creating high-accuracy package...")
+    print("  Creating high-accuracy package...")
     zip_path = Path("../data/atmosgen_weatherbench_data.zip")
     
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -469,10 +469,10 @@ This project demonstrates:
     # Get package info
     zip_size_mb = zip_path.stat().st_size / (1024 * 1024)
     
-    print(f"\n✅ High-accuracy Kaggle package created!")
-    print(f"📍 Location: {zip_path}")
-    print(f"📊 Size: {zip_size_mb:.1f} MB")
-    print(f"🌤️  Contents: 50 diverse weather sequences + High-accuracy training script")
+    print(f"\n High-accuracy Kaggle package created!")
+    print(f" Location: {zip_path}")
+    print(f" Size: {zip_size_mb:.1f} MB")
+    print(f"  Contents: 50 diverse weather sequences + High-accuracy training script")
     
     return zip_path
 
@@ -494,18 +494,18 @@ import json
 def integrate_high_accuracy_model():
     """Integrate the high-accuracy trained model"""
     
-    print("🔄 Integrating high-accuracy AtmosGen model...")
+    print(" Integrating high-accuracy AtmosGen model...")
     
     # Look for high-accuracy checkpoint
     checkpoint_zip = Path("atmosgen_high_accuracy_model.zip")
     
     if not checkpoint_zip.exists():
-        print("❌ High-accuracy checkpoint not found!")
+        print(" High-accuracy checkpoint not found!")
         print("Please download 'atmosgen_high_accuracy_model.zip' from Kaggle")
         return False
     
     # Extract to high-accuracy directory
-    print("📦 Extracting high-accuracy model...")
+    print(" Extracting high-accuracy model...")
     checkpoint_dir = Path("../checkpoints/atmosgen_high_accuracy")
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     
@@ -517,16 +517,16 @@ def integrate_high_accuracy_model():
     
     for required_file in required_files:
         if not (checkpoint_dir / required_file).exists():
-            print(f"❌ Missing high-accuracy file: {required_file}")
+            print(f" Missing high-accuracy file: {required_file}")
             return False
     
-    print("✅ High-accuracy model extracted successfully!")
+    print(" High-accuracy model extracted successfully!")
     
     # Load high-accuracy config
     with open(checkpoint_dir / 'high_accuracy_config.json', 'r') as f:
         config = json.load(f)
     
-    print(f"📊 High-accuracy model info:")
+    print(f" High-accuracy model info:")
     print(f"   - Model: {config['model_name']}")
     print(f"   - Training data: {config['training_data']}")
     print(f"   - Samples: {config['training_samples']}")
@@ -535,17 +535,17 @@ def integrate_high_accuracy_model():
     print(f"   - Accuracy improvement: {config['accuracy_improvement']}")
     
     # Update model service priority
-    print("🔧 Updating model service for high accuracy...")
+    print(" Updating model service for high accuracy...")
     
     # The model service will automatically use the high-accuracy model
     # because it has the highest priority
     
-    print("✅ High-accuracy integration complete!")
+    print(" High-accuracy integration complete!")
     print("\\nHigh-accuracy model features:")
-    print("✅ Trained on 50 diverse weather sequences")
-    print("✅ 5.5x more training data diversity")
-    print("✅ Improved accuracy and generalization")
-    print("✅ Professional resume-quality project")
+    print(" Trained on 50 diverse weather sequences")
+    print(" 5.5x more training data diversity")
+    print(" Improved accuracy and generalization")
+    print(" Professional resume-quality project")
     
     print("\\nNext steps:")
     print("1. Test: python test_high_accuracy_model.py")
@@ -561,7 +561,7 @@ if __name__ == "__main__":
     with open("integrate_high_accuracy_model.py", 'w') as f:
         f.write(integration_script)
     
-    print("✅ High-accuracy integration script created")
+    print(" High-accuracy integration script created")
 
 def main():
     """Main packaging function for WeatherBench data"""
@@ -580,9 +580,9 @@ def main():
         print("\n" + "=" * 60)
         print("HIGH-ACCURACY PACKAGE READY!")
         print("=" * 60)
-        print(f"📦 Upload file: {zip_path}")
-        print(f"🌤️  Contains: 50 diverse weather sequences")
-        print(f"🎯 Result: High-accuracy weather AI")
+        print(f" Upload file: {zip_path}")
+        print(f"  Contains: 50 diverse weather sequences")
+        print(f" Result: High-accuracy weather AI")
         
         print("\nKaggle steps:")
         print("1. Upload atmosgen_weatherbench_data.zip to Kaggle")
@@ -591,9 +591,9 @@ def main():
         print("4. Download high-accuracy model")
         print("5. Integrate with: python integrate_high_accuracy_model.py")
         
-        print("\n🏆 This will create a high-accuracy, resume-worthy weather AI!")
+        print("\n This will create a high-accuracy, resume-worthy weather AI!")
     else:
-        print("❌ High-accuracy packaging failed")
+        print(" High-accuracy packaging failed")
         print("Run: python download_weatherbench.py --sample-only first")
 
 if __name__ == "__main__":

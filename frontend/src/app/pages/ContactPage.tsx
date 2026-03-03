@@ -1,5 +1,6 @@
 import { Navigation } from '../components/Navigation';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, Send, Github, MessageCircleQuestion } from 'lucide-react';
+import { Link } from 'react-router';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
@@ -13,9 +14,17 @@ export function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock form submission
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    const subject = encodeURIComponent(`[AtmosGen] ${formData.subject}`);
+    const body = encodeURIComponent(
+      `Hi AtmosGen Team,\n\n` +
+      `${formData.message}\n\n` +
+      `---\n` +
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Subject: ${formData.subject}\n` +
+      `Sent from AtmosGen Contact Form`
+    );
+    window.location.href = `mailto:atmosgenhelp@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const updateField = (field: string, value: string) => {
@@ -32,10 +41,10 @@ export function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h1 className="mb-4">Contact Us</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <h1 className="text-5xl md:text-6xl mb-6 text-gray-900 dark:text-white">Contact Us</h1>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               Have questions about AtmosGen? We're here to help
             </p>
           </motion.div>
@@ -49,7 +58,7 @@ export function ContactPage() {
               className="lg:col-span-2"
             >
               <div className="backdrop-blur-lg bg-white/60 dark:bg-gray-800/60 rounded-xl border border-white/20 dark:border-gray-700/20 p-8">
-                <h3 className="mb-6">Send us a message</h3>
+                <h3 className="mb-6 text-gray-900 dark:text-white text-lg font-semibold">Send us a message</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -123,57 +132,68 @@ export function ContactPage() {
               </div>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Sidebar — Email, GitHub, FAQ */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="space-y-6"
             >
+              {/* Email */}
               <div className="backdrop-blur-lg bg-white/60 dark:bg-gray-800/60 rounded-xl border border-white/20 dark:border-gray-700/20 p-6">
-                <h3 className="mb-6">Contact Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <Mail className="size-5 text-blue-600 mt-1" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Email</p>
-                      <p className="text-gray-900 dark:text-white">contact@atmosgen.com</p>
-                    </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded-lg">
+                    <Mail className="size-5 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <div className="flex items-start gap-4">
-                    <Phone className="size-5 text-blue-600 mt-1" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Phone</p>
-                      <p className="text-gray-900 dark:text-white">+1 (555) 123-4567</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <MapPin className="size-5 text-blue-600 mt-1" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Address</p>
-                      <p className="text-gray-900 dark:text-white">
-                        123 Weather Lane<br />
-                        San Francisco, CA 94102
-                      </p>
-                    </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Email</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Send us an email anytime</p>
+                    <a
+                      href="mailto:atmosgenhelp@gmail.com"
+                      className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                    >
+                      atmosgenhelp@gmail.com
+                    </a>
                   </div>
                 </div>
               </div>
 
+              {/* GitHub */}
               <div className="backdrop-blur-lg bg-white/60 dark:bg-gray-800/60 rounded-xl border border-white/20 dark:border-gray-700/20 p-6">
-                <h3 className="mb-4">Business Hours</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Monday - Friday</span>
-                    <span className="text-gray-900 dark:text-white">9:00 AM - 6:00 PM</span>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded-lg">
+                    <Github className="size-5 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Saturday</span>
-                    <span className="text-gray-900 dark:text-white">10:00 AM - 4:00 PM</span>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">GitHub</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Check out our code and contribute</p>
+                    <a
+                      href="https://github.com/Rishabh1925/AtmosGen"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                    >
+                      View Repository
+                    </a>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Sunday</span>
-                    <span className="text-gray-900 dark:text-white">Closed</span>
+                </div>
+              </div>
+
+              {/* FAQ */}
+              <div className="backdrop-blur-lg bg-white/60 dark:bg-gray-800/60 rounded-xl border border-white/20 dark:border-gray-700/20 p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded-lg">
+                    <MessageCircleQuestion className="size-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">FAQ</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Find answers to common questions</p>
+                    <Link
+                      to="/faq"
+                      className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium inline-flex items-center gap-1"
+                    >
+                      View All FAQs
+                    </Link>
                   </div>
                 </div>
               </div>

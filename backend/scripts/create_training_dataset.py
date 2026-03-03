@@ -254,7 +254,7 @@ def generate_training_sequences():
                 'variation': variation,
                 'input_files': [],
                 'target_file': '',
-                'description': f"Weather evolution: {' → '.join(pattern)}"
+                'description': f"Weather evolution: {'  '.join(pattern)}"
             }
             
             training_data.append({
@@ -307,16 +307,16 @@ def save_training_dataset(training_data, output_dir):
         dataset_info['samples'].append(sample_info)
         
         if (idx + 1) % 10 == 0:
-            print(f"✓ Saved {idx + 1}/{len(training_data)} samples")
+            print(f" Saved {idx + 1}/{len(training_data)} samples")
     
     # Save dataset metadata
     with open(output_path / 'dataset_info.json', 'w') as f:
         json.dump(dataset_info, f, indent=2)
     
-    print(f"\n✅ Training dataset saved to: {output_path}")
-    print(f"📊 Total samples: {len(training_data)}")
-    print(f"📁 Input images: {len(training_data) * 3}")
-    print(f"🎯 Target images: {len(training_data)}")
+    print(f"\n Training dataset saved to: {output_path}")
+    print(f" Total samples: {len(training_data)}")
+    print(f" Input images: {len(training_data) * 3}")
+    print(f" Target images: {len(training_data)}")
     
     return output_path
 
@@ -327,20 +327,20 @@ def main():
     print("CREATING ATMOSGEN TRAINING DATASET")
     print("=" * 60)
     
-    print("🌤️  Generating weather sequences...")
+    print("  Generating weather sequences...")
     training_data = generate_training_sequences()
     
-    print(f"✓ Generated {len(training_data)} training sequences")
+    print(f" Generated {len(training_data)} training sequences")
     
-    print("\n💾 Saving training dataset...")
+    print("\n Saving training dataset...")
     output_dir = "../data/training"
     dataset_path = save_training_dataset(training_data, output_dir)
     
     print("\n" + "=" * 60)
     print("TRAINING DATASET CREATED!")
     print("=" * 60)
-    print(f"📍 Location: {dataset_path}")
-    print(f"📊 Ready for Kaggle upload")
+    print(f" Location: {dataset_path}")
+    print(f" Ready for Kaggle upload")
     print("\nNext steps:")
     print("1. Run: python package_for_kaggle.py")
     print("2. Upload to Kaggle")

@@ -23,7 +23,7 @@ def create_production_kaggle_script():
 !pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 -q
 !pip install xarray netcdf4 -q  # For satellite data processing
 
-print("✅ Production dependencies installed!")
+print(" Production dependencies installed!")
 
 # Cell 2: Import libraries
 import torch
@@ -42,12 +42,12 @@ import matplotlib.pyplot as plt
 from torchvision import transforms
 import xarray as xr
 
-print("✅ Libraries imported for production training!")
+print(" Libraries imported for production training!")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 # Cell 3: Extract real satellite data
-print("📦 Extracting real NOAA satellite data...")
+print(" Extracting real NOAA satellite data...")
 
 # Extract the production dataset
 with zipfile.ZipFile('/kaggle/input/atmosgen-production-data/atmosgen_production_data.zip', 'r') as zip_ref:
@@ -57,18 +57,18 @@ with zipfile.ZipFile('/kaggle/input/atmosgen-production-data/atmosgen_production
 with open('/kaggle/working/data/production_dataset_info.json', 'r') as f:
     dataset_info = json.load(f)
 
-print(f"✅ Real satellite dataset loaded!")
-print(f"📊 Total samples: {dataset_info['total_samples']}")
-print(f"🛰️  Data source: {dataset_info['data_source']}")
-print(f"📅 Created: {dataset_info['created_at']}")
+print(f" Real satellite dataset loaded!")
+print(f" Total samples: {dataset_info['total_samples']}")
+print(f"  Data source: {dataset_info['data_source']}")
+print(f" Created: {dataset_info['created_at']}")
 
 # Verify data quality
 processed_dir = '/kaggle/working/data/processed'
 if os.path.exists(processed_dir):
     image_files = [f for f in os.listdir(processed_dir) if f.endswith('.jpg')]
-    print(f"📸 Processed satellite images: {len(image_files)}")
+    print(f" Processed satellite images: {len(image_files)}")
 else:
-    print("⚠️  Using alternative data structure")
+    print("  Using alternative data structure")
 
 # Cell 4: Production Dataset Class
 class ProductionWeatherDataset(Dataset):
@@ -138,10 +138,10 @@ class ProductionWeatherDataset(Dataset):
 dataset = ProductionWeatherDataset('/kaggle/working/data')
 dataloader = DataLoader(dataset, batch_size=1, shuffle=True, num_workers=2)  # Smaller batch for memory
 
-print(f"✅ Production dataset ready: {len(dataset)} real satellite sequences")
+print(f" Production dataset ready: {len(dataset)} real satellite sequences")
 
 # Cell 5: Load pre-trained model (Production configuration)
-print("🤖 Loading Stable Diffusion for production training...")
+print(" Loading Stable Diffusion for production training...")
 
 model_id = "runwayml/stable-diffusion-v1-5"
 
@@ -161,7 +161,7 @@ unet.enable_gradient_checkpointing()
 # Freeze text encoder (only train UNet)
 text_encoder.requires_grad_(False)
 
-print("✅ Production model loaded with memory optimization!")
+print(" Production model loaded with memory optimization!")
 
 # Cell 6: Production Training Setup
 # Advanced optimizer with scheduling
@@ -197,10 +197,10 @@ def encode_prompt(prompt):
 
 # Pre-encode all prompts
 encoded_prompts = [encode_prompt(p) for p in weather_prompts]
-print("✅ Production training setup complete!")
+print(" Production training setup complete!")
 
 # Cell 7: Production Training Loop
-print("🚀 Starting production training on real NOAA data...")
+print(" Starting production training on real NOAA data...")
 
 num_epochs = 5  # More epochs for production quality
 global_step = 0
@@ -276,19 +276,19 @@ for epoch in range(num_epochs):
     # Epoch summary
     if num_batches > 0:
         avg_epoch_loss = epoch_loss / num_batches
-        print(f"✅ Epoch {epoch+1} - Average Loss: {avg_epoch_loss:.4f}")
+        print(f" Epoch {epoch+1} - Average Loss: {avg_epoch_loss:.4f}")
         
         # Save best model
         if avg_epoch_loss < best_loss:
             best_loss = avg_epoch_loss
-            print(f"🎯 New best loss: {best_loss:.4f} - Saving checkpoint")
+            print(f" New best loss: {best_loss:.4f} - Saving checkpoint")
     else:
-        print(f"⚠️  Epoch {epoch+1} - No valid batches processed")
+        print(f"  Epoch {epoch+1} - No valid batches processed")
 
-print("🎉 Production training completed!")
+print(" Production training completed!")
 
 # Cell 8: Save production model
-print("💾 Saving production-grade model...")
+print(" Saving production-grade model...")
 
 # Create output directory
 output_dir = "/kaggle/working/atmosgen_production"
@@ -331,19 +331,19 @@ metrics = {
 with open(f"{output_dir}/training_metrics.json", 'w') as f:
     json.dump(metrics, f, indent=2)
 
-print(f"✅ Production model saved to: {output_dir}")
+print(f" Production model saved to: {output_dir}")
 
 # Cell 9: Create production package
-print("📦 Creating production model package...")
+print(" Creating production model package...")
 
 import shutil
 shutil.make_archive("/kaggle/working/atmosgen_production_checkpoint", 'zip', output_dir)
 
-print("✅ Production model ready for download!")
-print("📁 Download: atmosgen_production_checkpoint.zip")
+print(" Production model ready for download!")
+print(" Download: atmosgen_production_checkpoint.zip")
 
 # Cell 10: Production model validation
-print("🧪 Validating production model...")
+print(" Validating production model...")
 
 # Create production pipeline
 production_pipe = StableDiffusionPipeline.from_pretrained(
@@ -375,15 +375,15 @@ plt.show()
 
 # Production summary
 print("\\n" + "="*60)
-print("🎉 PRODUCTION TRAINING COMPLETE!")
+print(" PRODUCTION TRAINING COMPLETE!")
 print("="*60)
-print(f"✅ Model: AtmosGen Production v1.0")
-print(f"🛰️  Training data: Real NOAA GOES satellite imagery")
-print(f"📊 Training samples: {len(dataset)} real weather sequences")
-print(f"🎯 Final loss: {best_loss:.4f}")
-print(f"⚡ Training steps: {global_step}")
-print(f"🏆 Quality: Production-grade meteorological accuracy")
-print("\\n🚀 Ready for operational weather forecasting!")
+print(f" Model: AtmosGen Production v1.0")
+print(f"  Training data: Real NOAA GOES satellite imagery")
+print(f" Training samples: {len(dataset)} real weather sequences")
+print(f" Final loss: {best_loss:.4f}")
+print(f" Training steps: {global_step}")
+print(f" Quality: Production-grade meteorological accuracy")
+print("\\n Ready for operational weather forecasting!")
 '''
     
     return kaggle_script
@@ -391,13 +391,13 @@ print("\\n🚀 Ready for operational weather forecasting!")
 def package_production_data():
     """Package real NOAA data for production Kaggle training"""
     
-    print("📦 Packaging production NOAA data for Kaggle...")
+    print(" Packaging production NOAA data for Kaggle...")
     
     # Check for production data
     production_dir = Path("../data/production")
     
     if not production_dir.exists():
-        print("❌ Production data not found!")
+        print(" Production data not found!")
         print("Run: python download_production_data.py first")
         return None
     
@@ -406,13 +406,13 @@ def package_production_data():
     package_dir.mkdir(exist_ok=True)
     
     # Copy production data
-    print("📁 Copying real satellite data...")
+    print(" Copying real satellite data...")
     if (package_dir / "production_data").exists():
         shutil.rmtree(package_dir / "production_data")
     shutil.copytree(production_dir, package_dir / "production_data")
     
     # Create production Kaggle script
-    print("📝 Creating production training script...")
+    print(" Creating production training script...")
     kaggle_script = create_production_kaggle_script()
     
     with open(package_dir / "atmosgen_production_training.py", 'w') as f:
@@ -421,7 +421,7 @@ def package_production_data():
     # Create production README
     readme_content = """# AtmosGen Production Weather Forecasting Dataset
 
-## 🛰️ Real NOAA Satellite Data for Production Training
+##  Real NOAA Satellite Data for Production Training
 
 ### Overview
 This dataset contains **real NOAA GOES satellite imagery** for training a production-grade weather forecasting AI model. This is legitimate meteorological data used by professional weather services.
@@ -441,7 +441,7 @@ This dataset contains **real NOAA GOES satellite imagery** for training a produc
 - **Base:** Stable Diffusion v1.5 (production-proven)
 - **Training:** Fine-tuned on real meteorological data
 - **Task:** Multi-step weather sequence forecasting
-- **Input:** 3 real satellite images → Output: 1 forecast image
+- **Input:** 3 real satellite images  Output: 1 forecast image
 
 ### Training Specifications
 - **Data:** Real NOAA satellite imagery (not synthetic)
@@ -453,10 +453,10 @@ This dataset contains **real NOAA GOES satellite imagery** for training a produc
 
 ### Expected Results
 This model will achieve **production-grade accuracy** suitable for:
-- ✅ **Resume projects** - Real meteorological data
-- ✅ **Professional portfolios** - Industry-standard approach
-- ✅ **Academic research** - Legitimate scientific methodology
-- ✅ **Operational deployment** - Weather service quality
+-  **Resume projects** - Real meteorological data
+-  **Professional portfolios** - Industry-standard approach
+-  **Academic research** - Legitimate scientific methodology
+-  **Operational deployment** - Weather service quality
 
 ### Performance Targets
 - **Forecast accuracy:** Comparable to operational models
@@ -485,14 +485,14 @@ This project demonstrates:
 - **Scalable architecture** (cloud-ready deployment)
 - **Industry standards** (operational quality)
 
-**Ready for production weather AI training!** 🌤️⚡
+**Ready for production weather AI training!** 
 """
     
     with open(package_dir / "README.md", 'w') as f:
         f.write(readme_content)
     
     # Create the production zip package
-    print("🗜️  Creating production package...")
+    print("  Creating production package...")
     zip_path = Path("../data/atmosgen_production_data.zip")
     
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -505,10 +505,10 @@ This project demonstrates:
     # Get package info
     zip_size_mb = zip_path.stat().st_size / (1024 * 1024)
     
-    print(f"\n✅ Production Kaggle package created!")
-    print(f"📍 Location: {zip_path}")
-    print(f"📊 Size: {zip_size_mb:.1f} MB")
-    print(f"🛰️  Contents: Real NOAA satellite data + Production training script")
+    print(f"\n Production Kaggle package created!")
+    print(f" Location: {zip_path}")
+    print(f" Size: {zip_size_mb:.1f} MB")
+    print(f"  Contents: Real NOAA satellite data + Production training script")
     
     return zip_path
 
@@ -530,18 +530,18 @@ import json
 def integrate_production_model():
     """Integrate the production-trained model"""
     
-    print("🔄 Integrating production AtmosGen model...")
+    print(" Integrating production AtmosGen model...")
     
     # Look for production checkpoint
     checkpoint_zip = Path("atmosgen_production_checkpoint.zip")
     
     if not checkpoint_zip.exists():
-        print("❌ Production checkpoint not found!")
+        print(" Production checkpoint not found!")
         print("Please download 'atmosgen_production_checkpoint.zip' from Kaggle")
         return False
     
     # Extract to production directory
-    print("📦 Extracting production model...")
+    print(" Extracting production model...")
     checkpoint_dir = Path("../checkpoints/atmosgen_production")
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     
@@ -553,16 +553,16 @@ def integrate_production_model():
     
     for required_file in required_files:
         if not (checkpoint_dir / required_file).exists():
-            print(f"❌ Missing production file: {required_file}")
+            print(f" Missing production file: {required_file}")
             return False
     
-    print("✅ Production model extracted successfully!")
+    print(" Production model extracted successfully!")
     
     # Load production config
     with open(checkpoint_dir / 'production_model_config.json', 'r') as f:
         config = json.load(f)
     
-    print(f"📊 Production model info:")
+    print(f" Production model info:")
     print(f"   - Model: {config['model_type']}")
     print(f"   - Training data: {config['training_data']}")
     print(f"   - Samples: {config['training_samples']}")
@@ -571,17 +571,17 @@ def integrate_production_model():
     print(f"   - Accuracy: {config['model_accuracy']}")
     
     # Update model service priority
-    print("🔧 Updating model service for production...")
+    print(" Updating model service for production...")
     
     # The model service will automatically use the production model
     # because it has higher priority than demo models
     
-    print("✅ Production integration complete!")
+    print(" Production integration complete!")
     print("\\nProduction model features:")
-    print("✅ Trained on real NOAA satellite data")
-    print("✅ Production-grade meteorological accuracy")
-    print("✅ Professional weather forecasting quality")
-    print("✅ Resume-worthy project results")
+    print(" Trained on real NOAA satellite data")
+    print(" Production-grade meteorological accuracy")
+    print(" Professional weather forecasting quality")
+    print(" Resume-worthy project results")
     
     print("\\nNext steps:")
     print("1. Test: python test_production_model.py")
@@ -597,7 +597,7 @@ if __name__ == "__main__":
     with open("integrate_production_model.py", 'w') as f:
         f.write(integration_script)
     
-    print("✅ Production integration script created")
+    print(" Production integration script created")
 
 def main():
     """Main packaging function for production data"""
@@ -616,9 +616,9 @@ def main():
         print("\n" + "=" * 60)
         print("PRODUCTION PACKAGE READY!")
         print("=" * 60)
-        print(f"📦 Upload file: {zip_path}")
-        print(f"🛰️  Contains: Real NOAA satellite data")
-        print(f"🎯 Result: Production-grade weather AI")
+        print(f" Upload file: {zip_path}")
+        print(f"  Contains: Real NOAA satellite data")
+        print(f" Result: Production-grade weather AI")
         
         print("\\nKaggle steps:")
         print("1. Upload atmosgen_production_data.zip to Kaggle")
@@ -627,9 +627,9 @@ def main():
         print("4. Download production model")
         print("5. Integrate with: python integrate_production_model.py")
         
-        print("\\n🏆 This will create a legitimate, resume-worthy weather AI!")
+        print("\\n This will create a legitimate, resume-worthy weather AI!")
     else:
-        print("❌ Production packaging failed")
+        print(" Production packaging failed")
         print("Run: python download_production_data.py first")
 
 if __name__ == "__main__":

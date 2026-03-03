@@ -69,22 +69,22 @@ def create_test_weather_sequence():
 async def test_model_comparison():
     """Test and compare model results before/after fine-tuning"""
     
-    print("🧪 Testing Fine-tuned AtmosGen Model")
+    print(" Testing Fine-tuned AtmosGen Model")
     print("=" * 50)
     
     # Check if fine-tuned model exists
     model_config = load_finetuned_model_info()
     
     if model_config:
-        print("✅ Fine-tuned model found!")
+        print(" Fine-tuned model found!")
         print(f"   - Training samples: {model_config['training_samples']}")
         print(f"   - Epochs: {model_config['epochs']}")
         print(f"   - Final loss: {model_config['final_loss']:.4f}")
     else:
-        print("⚠️  Fine-tuned model not found, using demo checkpoint")
+        print("  Fine-tuned model not found, using demo checkpoint")
     
     # Create test sequence
-    print("\n🌤️  Creating test weather sequence...")
+    print("\n  Creating test weather sequence...")
     test_sequence = create_test_weather_sequence()
     
     # Save test inputs for visualization
@@ -94,20 +94,20 @@ async def test_model_comparison():
     for i, img in enumerate(test_sequence):
         img.save(output_dir / f"test_input_{i+1}.jpg")
     
-    print(f"✓ Test sequence saved to: {output_dir}")
+    print(f" Test sequence saved to: {output_dir}")
     
     # Initialize model service
-    print("\n🤖 Loading model...")
+    print("\n Loading model...")
     model_service = ModelService()
     
     try:
         await model_service.load_model()
         
         if not model_service.is_loaded():
-            print("❌ Model failed to load")
+            print(" Model failed to load")
             return
         
-        print("✅ Model loaded successfully")
+        print(" Model loaded successfully")
         
         # Create mock upload files from test sequence
         from fastapi import UploadFile
@@ -127,17 +127,17 @@ async def test_model_comparison():
             )
             upload_files.append(upload_file)
         
-        print(f"✓ Created {len(upload_files)} test inputs")
+        print(f" Created {len(upload_files)} test inputs")
         
         # Run prediction
-        print("\n🔮 Generating weather forecast...")
+        print("\n Generating weather forecast...")
         start_time = time.time()
         
         result = await model_service.predict(upload_files)
         
         processing_time = time.time() - start_time
         
-        print(f"✅ Prediction completed in {processing_time:.2f} seconds")
+        print(f" Prediction completed in {processing_time:.2f} seconds")
         
         # Save the generated forecast
         if 'generated_image' in result:
@@ -155,28 +155,28 @@ async def test_model_comparison():
             with open(forecast_path, 'wb') as f:
                 f.write(forecast_bytes)
             
-            print(f"✓ Forecast saved: {forecast_path}")
+            print(f" Forecast saved: {forecast_path}")
             
             # Create comparison visualization
             create_comparison_visualization(test_sequence, forecast_path, output_dir)
             
         print("\n" + "=" * 50)
-        print("🎉 MODEL TEST COMPLETED!")
+        print(" MODEL TEST COMPLETED!")
         print("=" * 50)
         
         if model_config:
-            print("✅ Fine-tuned model is working!")
-            print("🎯 Results should show realistic weather patterns")
+            print(" Fine-tuned model is working!")
+            print(" Results should show realistic weather patterns")
         else:
-            print("⚠️  Using demo model - consider fine-tuning for better results")
+            print("  Using demo model - consider fine-tuning for better results")
         
-        print(f"\n📁 Results saved in: {output_dir}")
-        print("📊 Check the comparison image to see the forecast quality")
+        print(f"\n Results saved in: {output_dir}")
+        print(" Check the comparison image to see the forecast quality")
         
         return True
         
     except Exception as e:
-        print(f"\n❌ Model test failed: {e}")
+        print(f"\n Model test failed: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -210,7 +210,7 @@ def create_comparison_visualization(input_sequence, forecast_path, output_dir):
         plt.savefig(comparison_path, dpi=150, bbox_inches='tight')
         plt.close()
         
-        print(f"✓ Comparison visualization saved: {comparison_path}")
+        print(f" Comparison visualization saved: {comparison_path}")
         
     except Exception as e:
         print(f"Warning: Could not create comparison visualization: {e}")
@@ -218,22 +218,22 @@ def create_comparison_visualization(input_sequence, forecast_path, output_dir):
 def check_model_improvements():
     """Check what improvements the fine-tuned model should show"""
     
-    print("\n📈 Expected Improvements from Fine-tuning:")
+    print("\n Expected Improvements from Fine-tuning:")
     print("=" * 50)
     
     improvements = [
-        "🌤️  Realistic cloud formations and patterns",
-        "🌪️  Proper storm development and structure", 
-        "🌈  Smooth weather transitions over time",
-        "🎯  Weather-appropriate colors and textures",
-        "⚡ Consistent atmospheric physics",
-        "🌊  Realistic precipitation and wind patterns"
+        "  Realistic cloud formations and patterns",
+        "  Proper storm development and structure", 
+        "  Smooth weather transitions over time",
+        "  Weather-appropriate colors and textures",
+        " Consistent atmospheric physics",
+        "  Realistic precipitation and wind patterns"
     ]
     
     for improvement in improvements:
         print(f"   {improvement}")
     
-    print("\n📊 Quality Metrics to Check:")
+    print("\n Quality Metrics to Check:")
     print("   - Visual realism (clouds look natural)")
     print("   - Temporal consistency (logical weather evolution)")
     print("   - Meteorological accuracy (realistic patterns)")
@@ -252,14 +252,14 @@ async def main():
     success = await test_model_comparison()
     
     if success:
-        print("\n🎉 Test completed successfully!")
+        print("\n Test completed successfully!")
         print("\nNext steps:")
         print("1. Check the generated images in data/test_results/")
         print("2. Compare with previous demo results")
         print("3. Start the full AtmosGen app to test with real data")
         print("4. The frontend will automatically use the fine-tuned model!")
     else:
-        print("\n❌ Test failed. Check the error messages above.")
+        print("\n Test failed. Check the error messages above.")
 
 if __name__ == "__main__":
     asyncio.run(main())

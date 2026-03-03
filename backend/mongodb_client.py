@@ -270,10 +270,27 @@ class MongoDB:
     
     # Dashboard operations
     async def get_dashboard_stats(self, user_id: str) -> Dict:
-        """Get dashboard statistics for user"""
+        """Get dashboard statistics for user — real metrics from forecast history"""
         try:
             # Count total forecasts
             total_forecasts = await self.forecasts.count_documents({"user_id": user_id})
+            
+            # Compute real averages using aggregation
+            pipeline = [
+                {"$match": {"user_id": user_id}},
+                {"$group": {
+                    "_id": None,
+                    "avg_coverage": {"$avg": "$cloud_coverage_pct"},
+                    "avg_processing_time": {"$avg": "$processing_time"},
+                }}
+            ]
+            
+            avg_coverage = 0.0
+            avg_processing_time = 0.0
+            
+            async for result in self.forecasts.aggregate(pipeline):
+                avg_coverage = result.get("avg_coverage", 0.0) or 0.0
+                avg_processing_time = result.get("avg_processing_time", 0.0) or 0.0
             
             # Get recent forecasts
             recent_cursor = self.forecasts.find(
@@ -284,14 +301,16 @@ class MongoDB:
             async for forecast in recent_cursor:
                 recent_forecasts.append({
                     "id": str(forecast["_id"]),
-                    "location": forecast.get("location", "Unknown"),
-                    "accuracy": forecast.get("accuracy", 85.0),
+                    "location": forecast.get("location", "Satellite"),
+                    "cloud_coverage_pct": forecast.get("cloud_coverage_pct", 0),
+                    "model_type": forecast.get("model_type", "Unknown"),
                     "date": forecast["created_at"].isoformat()
                 })
             
             return {
                 "total_forecasts": total_forecasts,
-                "accuracy_rate": 87.5,  # Mock average accuracy
+                "avg_cloud_coverage": round(avg_coverage, 1),
+                "avg_processing_time": round(avg_processing_time, 3),
                 "recent_forecasts": recent_forecasts
             }
             
@@ -299,7 +318,8 @@ class MongoDB:
             logger.error(f"Failed to get dashboard stats: {e}")
             return {
                 "total_forecasts": 0,
-                "accuracy_rate": 0.0,
+                "avg_cloud_coverage": 0.0,
+                "avg_processing_time": 0.0,
                 "recent_forecasts": []
             }
 

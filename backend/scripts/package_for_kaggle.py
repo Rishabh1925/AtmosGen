@@ -36,10 +36,10 @@ import zipfile
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-print("✅ Libraries imported successfully!")
+print(" Libraries imported successfully!")
 
 # Cell 3: Extract and load data
-print("📦 Extracting training data...")
+print(" Extracting training data...")
 
 # Extract the uploaded dataset
 with zipfile.ZipFile('/kaggle/input/atmosgen-weather-training-data/atmosgen_training_data.zip', 'r') as zip_ref:
@@ -49,8 +49,8 @@ with zipfile.ZipFile('/kaggle/input/atmosgen-weather-training-data/atmosgen_trai
 with open('/kaggle/working/data/dataset_info.json', 'r') as f:
     dataset_info = json.load(f)
 
-print(f"✅ Dataset loaded: {dataset_info['total_samples']} samples")
-print(f"📅 Created: {dataset_info['created_at']}")
+print(f" Dataset loaded: {dataset_info['total_samples']} samples")
+print(f" Created: {dataset_info['created_at']}")
 
 # Cell 4: Custom Dataset Class
 class WeatherForecastDataset(Dataset):
@@ -104,10 +104,10 @@ transform = transforms.Compose([
 dataset = WeatherForecastDataset('/kaggle/working/data', transform=transform)
 dataloader = DataLoader(dataset, batch_size=2, shuffle=True, num_workers=2)
 
-print(f"✅ Dataset ready: {len(dataset)} samples")
+print(f" Dataset ready: {len(dataset)} samples")
 
 # Cell 5: Load pre-trained Stable Diffusion
-print("🤖 Loading pre-trained Stable Diffusion model...")
+print(" Loading pre-trained Stable Diffusion model...")
 
 model_id = "runwayml/stable-diffusion-v1-5"
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -122,7 +122,7 @@ scheduler = DDPMScheduler.from_pretrained(model_id, subfolder="scheduler")
 text_encoder = text_encoder.to(device)
 unet = unet.to(device)
 
-print(f"✅ Model loaded on {device}")
+print(f" Model loaded on {device}")
 
 # Cell 6: Prepare for fine-tuning
 # Freeze text encoder (we only fine-tune the UNet)
@@ -155,10 +155,10 @@ def encode_prompt(prompt):
     
     return text_embeddings
 
-print("✅ Fine-tuning setup complete")
+print(" Fine-tuning setup complete")
 
 # Cell 7: Training loop
-print("🚀 Starting fine-tuning...")
+print(" Starting fine-tuning...")
 
 num_epochs = 3
 global_step = 0
@@ -217,12 +217,12 @@ for epoch in range(num_epochs):
             print(f"Step {global_step}, Avg Loss: {avg_loss:.4f}")
     
     avg_epoch_loss = epoch_loss / len(dataloader)
-    print(f"✅ Epoch {epoch+1} completed - Average Loss: {avg_epoch_loss:.4f}")
+    print(f" Epoch {epoch+1} completed - Average Loss: {avg_epoch_loss:.4f}")
 
-print("🎉 Fine-tuning completed!")
+print(" Fine-tuning completed!")
 
 # Cell 8: Save fine-tuned model
-print("💾 Saving fine-tuned model...")
+print(" Saving fine-tuned model...")
 
 # Create output directory
 output_dir = "/kaggle/working/atmosgen_finetuned"
@@ -251,21 +251,21 @@ model_config = {
 with open(f"{output_dir}/model_config.json", 'w') as f:
     json.dump(model_config, f, indent=2)
 
-print(f"✅ Model saved to: {output_dir}")
+print(f" Model saved to: {output_dir}")
 
 # Cell 9: Create downloadable package
-print("📦 Creating downloadable package...")
+print(" Creating downloadable package...")
 
 import shutil
 
 # Create zip file for download
 shutil.make_archive("/kaggle/working/atmosgen_checkpoint", 'zip', output_dir)
 
-print("✅ Download 'atmosgen_checkpoint.zip' from the output section!")
-print("🎯 Model is ready for integration with AtmosGen!")
+print(" Download 'atmosgen_checkpoint.zip' from the output section!")
+print(" Model is ready for integration with AtmosGen!")
 
 # Cell 10: Test the fine-tuned model
-print("🧪 Testing fine-tuned model...")
+print(" Testing fine-tuned model...")
 
 # Create pipeline with fine-tuned UNet
 from diffusers import StableDiffusionPipeline
@@ -292,7 +292,7 @@ plt.title("Fine-tuned Weather Forecast Sample")
 plt.axis('off')
 plt.show()
 
-print("🎉 Fine-tuning complete! Model ready for weather forecasting!")
+print(" Fine-tuning complete! Model ready for weather forecasting!")
 '''
     
     return kaggle_script
@@ -300,12 +300,12 @@ print("🎉 Fine-tuning complete! Model ready for weather forecasting!")
 def package_training_data():
     """Package all training data and scripts for Kaggle"""
     
-    print("📦 Packaging training data for Kaggle...")
+    print(" Packaging training data for Kaggle...")
     
     # Check if training data exists
     training_dir = Path("../data/training")
     if not training_dir.exists():
-        print("❌ Training data not found. Run create_training_dataset.py first!")
+        print(" Training data not found. Run create_training_dataset.py first!")
         return None
     
     # Create package directory
@@ -313,13 +313,13 @@ def package_training_data():
     package_dir.mkdir(exist_ok=True)
     
     # Copy training data
-    print("📁 Copying training data...")
+    print(" Copying training data...")
     if (package_dir / "training_data").exists():
         shutil.rmtree(package_dir / "training_data")
     shutil.copytree(training_dir, package_dir / "training_data")
     
     # Create Kaggle training script
-    print("📝 Creating Kaggle training script...")
+    print(" Creating Kaggle training script...")
     kaggle_script = create_kaggle_training_script()
     
     with open(package_dir / "atmosgen_kaggle_training.py", 'w') as f:
@@ -348,7 +348,7 @@ This dataset contains synthetic weather sequences for training the AtmosGen weat
 - Base: Stable Diffusion v1.5
 - Fine-tuning: UNet component only
 - Task: Weather sequence forecasting
-- Input: 3 satellite images → Output: 1 forecast image
+- Input: 3 satellite images  Output: 1 forecast image
 
 ## Training Details
 - Samples: 40 weather sequences (8 patterns × 5 variations)
@@ -364,14 +364,14 @@ After fine-tuning, the model should generate realistic weather patterns includin
 - Clear to cloudy transitions
 - Hurricane/cyclone structures
 
-Ready for weather AI training! 🌤️
+Ready for weather AI training! 
 """
     
     with open(package_dir / "README.md", 'w') as f:
         f.write(readme_content)
     
     # Create the final zip package
-    print("🗜️  Creating zip package...")
+    print("  Creating zip package...")
     zip_path = Path("../data/atmosgen_training_data.zip")
     
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -384,10 +384,10 @@ Ready for weather AI training! 🌤️
     # Get package info
     zip_size_mb = zip_path.stat().st_size / (1024 * 1024)
     
-    print(f"\n✅ Kaggle package created!")
-    print(f"📍 Location: {zip_path}")
-    print(f"📊 Size: {zip_size_mb:.1f} MB")
-    print(f"📁 Contents: Training data + Kaggle script")
+    print(f"\n Kaggle package created!")
+    print(f" Location: {zip_path}")
+    print(f" Size: {zip_size_mb:.1f} MB")
+    print(f" Contents: Training data + Kaggle script")
     
     return zip_path
 
@@ -409,18 +409,18 @@ import json
 def integrate_finetuned_model():
     """Integrate the downloaded fine-tuned model"""
     
-    print("🔄 Integrating fine-tuned model into AtmosGen...")
+    print(" Integrating fine-tuned model into AtmosGen...")
     
     # Look for downloaded checkpoint
     checkpoint_zip = Path("atmosgen_checkpoint.zip")
     
     if not checkpoint_zip.exists():
-        print("❌ Checkpoint not found!")
+        print(" Checkpoint not found!")
         print("Please download 'atmosgen_checkpoint.zip' from Kaggle and place it in this directory.")
         return False
     
     # Extract checkpoint
-    print("📦 Extracting checkpoint...")
+    print(" Extracting checkpoint...")
     checkpoint_dir = Path("../checkpoints/atmosgen_finetuned")
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     
@@ -432,16 +432,16 @@ def integrate_finetuned_model():
     
     for required_file in required_files:
         if not (checkpoint_dir / required_file).exists():
-            print(f"❌ Missing required file: {required_file}")
+            print(f" Missing required file: {required_file}")
             return False
     
-    print("✅ Checkpoint extracted successfully!")
+    print(" Checkpoint extracted successfully!")
     
     # Load model config
     with open(checkpoint_dir / 'model_config.json', 'r') as f:
         config = json.load(f)
     
-    print(f"📊 Model info:")
+    print(f" Model info:")
     print(f"   - Type: {config['model_type']}")
     print(f"   - Base model: {config['base_model']}")
     print(f"   - Training samples: {config['training_samples']}")
@@ -449,12 +449,12 @@ def integrate_finetuned_model():
     print(f"   - Final loss: {config['final_loss']:.4f}")
     
     # Update model service to use fine-tuned model
-    print("🔧 Updating model service...")
+    print(" Updating model service...")
     
     # The model service will automatically detect and use the fine-tuned model
     # because it looks for the most recent checkpoint
     
-    print("✅ Integration complete!")
+    print(" Integration complete!")
     print("\nNext steps:")
     print("1. Test the model: python test_finetuned_model.py")
     print("2. Start the backend: python main.py")
@@ -469,7 +469,7 @@ if __name__ == "__main__":
     with open("integrate_finetuned_model.py", 'w') as f:
         f.write(integration_script)
     
-    print("✅ Integration script created: integrate_finetuned_model.py")
+    print(" Integration script created: integrate_finetuned_model.py")
 
 def main():
     """Main packaging function"""
@@ -488,8 +488,8 @@ def main():
         print("\n" + "=" * 60)
         print("KAGGLE PACKAGE READY!")
         print("=" * 60)
-        print(f"📦 Upload file: {zip_path}")
-        print(f"📋 Follow guide: KAGGLE_TRAINING_GUIDE.md")
+        print(f" Upload file: {zip_path}")
+        print(f" Follow guide: KAGGLE_TRAINING_GUIDE.md")
         print("\nKaggle steps:")
         print("1. Go to kaggle.com/datasets")
         print("2. Upload atmosgen_training_data.zip")
@@ -497,7 +497,7 @@ def main():
         print("4. Follow the training guide!")
         print("5. Download checkpoint and run integrate_finetuned_model.py")
     else:
-        print("❌ Packaging failed. Check training data exists.")
+        print(" Packaging failed. Check training data exists.")
 
 if __name__ == "__main__":
     main()

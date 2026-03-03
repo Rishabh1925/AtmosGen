@@ -260,8 +260,8 @@ class NOAADataDownloader:
         with open(self.output_dir / 'production_dataset_info.json', 'w') as f:
             json.dump(dataset_info, f, indent=2)
         
-        print(f"\n✅ Created {len(training_data)} real satellite training sequences")
-        print(f"📁 Data saved in: {self.output_dir}")
+        print(f"\n Created {len(training_data)} real satellite training sequences")
+        print(f" Data saved in: {self.output_dir}")
         
         return training_data
     
@@ -274,7 +274,7 @@ class NOAADataDownloader:
         noaa_files = list(Path("../data/raw").glob("*.nc"))
         
         if not noaa_files:
-            print("❌ No NOAA .nc files found in ../data/raw/")
+            print(" No NOAA .nc files found in ../data/raw/")
             return []
         
         print(f"Found {len(noaa_files)} existing NOAA files")
@@ -320,7 +320,7 @@ class NOAADataDownloader:
         with open(self.output_dir / 'production_dataset_info.json', 'w') as f:
             json.dump(dataset_info, f, indent=2)
         
-        print(f"✅ Created {len(training_data)} real NOAA training sequences")
+        print(f" Created {len(training_data)} real NOAA training sequences")
         return training_data
 
 def download_era5_data():
@@ -360,17 +360,17 @@ def main():
         print("\n" + "=" * 60)
         print("REAL DATA DOWNLOAD COMPLETE!")
         print("=" * 60)
-        print(f"✅ Created {len(training_data)} real satellite sequences")
-        print(f"📁 Data location: {args.output_dir}")
-        print(f"🛰️  Source: NOAA GOES satellite imagery")
-        print(f"📊 Ready for production training!")
+        print(f" Created {len(training_data)} real satellite sequences")
+        print(f" Data location: {args.output_dir}")
+        print(f"  Source: NOAA GOES satellite imagery")
+        print(f" Ready for production training!")
         
         print("\nNext steps:")
         print("1. Package for Kaggle: python package_production_data.py")
         print("2. Train on Kaggle with real data")
         print("3. Achieve production-grade accuracy!")
     else:
-        print("\n❌ Failed to create training data")
+        print("\n Failed to create training data")
         print("Check internet connection and try again")
 
 if __name__ == "__main__":

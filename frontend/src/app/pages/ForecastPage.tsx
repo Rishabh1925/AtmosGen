@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { Upload, CheckCircle, AlertCircle } from 'lucide-react';
+import { Upload, CheckCircle, AlertCircle, CloudRain, Percent, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Navigation } from '../components/Navigation';
 import { useState, useRef } from 'react';
@@ -7,6 +7,7 @@ import { api } from '../../lib/api';
 
 export function ForecastPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
@@ -15,6 +16,7 @@ export function ForecastPage() {
   const handleFileSelect = (file: File) => {
     if (file && file.type.startsWith('image/')) {
       setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
       setError(null);
     } else {
       setError('Please select a valid image file');
@@ -59,6 +61,7 @@ export function ForecastPage() {
 
   const resetUpload = () => {
     setSelectedFile(null);
+    setPreviewUrl(null);
     setResult(null);
     setError(null);
     if (fileInputRef.current) {
@@ -71,7 +74,7 @@ export function ForecastPage() {
       <Navigation />
 
       <div className="pt-24 pb-12 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,17 +83,17 @@ export function ForecastPage() {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-6xl mb-6 text-gray-900 dark:text-white">
-              AI-Powered Weather Forecasting
+              Cloud Coverage Prediction
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
-              Enterprise-grade weather prediction using advanced machine learning and satellite imagery analysis
+              Upload satellite imagery to detect clouds using our fine-tuned U-Net segmentation model with EfficientNet-B0 encoder
             </p>
             <div className="flex items-center justify-center gap-4">
-              <button 
+              <button
                 onClick={() => document.getElementById('upload-section')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg"
               >
-                Start Forecasting
+                Start Analysis
               </button>
               <Link
                 to="/dashboard"
@@ -110,7 +113,7 @@ export function ForecastPage() {
             className="backdrop-blur-lg bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-white/20 dark:border-gray-700/20 p-12"
           >
             {!result ? (
-              <div 
+              <div
                 className="border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-xl p-16 text-center hover:border-blue-500 dark:hover:border-blue-400 transition-colors cursor-pointer"
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
@@ -121,15 +124,26 @@ export function ForecastPage() {
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   Drop your satellite images here or click to browse
                 </p>
-                
+
                 {selectedFile ? (
                   <div className="mb-6">
                     <div className="flex items-center justify-center gap-2 mb-4">
                       <CheckCircle className="size-5 text-green-500" />
                       <span className="text-gray-700 dark:text-gray-300">{selectedFile.name}</span>
                     </div>
+
+                    {previewUrl && (
+                      <div className="mb-4">
+                        <img
+                          src={previewUrl}
+                          alt="Selected satellite image"
+                          className="max-w-xs h-auto rounded-lg mx-auto shadow-md"
+                        />
+                      </div>
+                    )}
+
                     <div className="flex gap-4 justify-center">
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.stopPropagation();
                           handleUpload();
@@ -137,9 +151,9 @@ export function ForecastPage() {
                         disabled={isUploading}
                         className="px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg disabled:opacity-50"
                       >
-                        {isUploading ? 'Generating...' : 'Generate Forecast'}
+                        {isUploading ? 'Analyzing...' : 'Analyze Cloud Coverage'}
                       </button>
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.stopPropagation();
                           resetUpload();
@@ -172,38 +186,86 @@ export function ForecastPage() {
                 />
               </div>
             ) : (
-              <div className="text-center">
-                <h3 className="text-2xl mb-6 text-gray-900 dark:text-white">Weather Forecast Generated</h3>
-                
-                <div className="mb-6">
-                  <img 
-                    src={`data:image/png;base64,${result.generated_image}`}
-                    alt="Generated weather forecast"
-                    className="max-w-full h-auto rounded-lg mx-auto shadow-lg"
-                  />
+              <div>
+                <h3 className="text-2xl mb-6 text-gray-900 dark:text-white text-center">
+                  Cloud Coverage Analysis Complete
+                </h3>
+
+                {/* Cloud Coverage Highlight */}
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-center mb-8"
+                >
+                  <div className="inline-flex items-center gap-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl px-8 py-4 border border-blue-200 dark:border-blue-700">
+                    <CloudRain className="size-8 text-blue-600 dark:text-blue-400" />
+                    <div>
+                      <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
+                        {result.cloud_coverage_pct}%
+                      </div>
+                      <div className="text-sm text-blue-600/70 dark:text-blue-400/70">Cloud Coverage</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Side-by-side: Input  Segmentation Overlay */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {/* Input Image */}
+                  <div className="text-center">
+                    <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Input Satellite Image</h4>
+                    <img
+                      src={`data:image/png;base64,${result.input_image}`}
+                      alt="Input satellite image"
+                      className="w-full h-auto rounded-lg shadow-lg"
+                    />
+                  </div>
+
+                  {/* Cloud Mask */}
+                  <div className="text-center">
+                    <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Cloud Segmentation Mask</h4>
+                    <img
+                      src={`data:image/png;base64,${result.cloud_mask}`}
+                      alt="Cloud segmentation mask"
+                      className="w-full h-auto rounded-lg shadow-lg"
+                    />
+                  </div>
+
+                  {/* Overlay */}
+                  <div className="text-center">
+                    <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Cloud Overlay Visualization</h4>
+                    <img
+                      src={`data:image/png;base64,${result.generated_image}`}
+                      alt="Cloud overlay visualization"
+                      className="w-full h-auto rounded-lg shadow-lg"
+                    />
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-sm">
-                  <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
-                    <div className="font-semibold text-gray-900 dark:text-white">Processing Time</div>
-                    <div className="text-gray-600 dark:text-gray-400">{result.processing_time.toFixed(3)}s</div>
+                {/* Metadata */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                    <Clock className="size-5 text-gray-500" />
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-white">Processing Time</div>
+                      <div className="text-gray-600 dark:text-gray-400">{result.processing_time}s</div>
+                    </div>
                   </div>
-                  <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
-                    <div className="font-semibold text-gray-900 dark:text-white">Model Type</div>
-                    <div className="text-gray-600 dark:text-gray-400">Lightweight Weather CNN</div>
-                  </div>
-                  <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
-                    <div className="font-semibold text-gray-900 dark:text-white">Status</div>
-                    <div className="text-green-600 dark:text-green-400">Success</div>
+                  <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                    <Percent className="size-5 text-gray-500" />
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-white">Coverage</div>
+                      <div className="text-gray-600 dark:text-gray-400">{result.cloud_coverage_pct}% cloudy</div>
+                    </div>
                   </div>
                 </div>
 
                 <div className="flex gap-4 justify-center">
-                  <button 
+                  <button
                     onClick={resetUpload}
                     className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg"
                   >
-                    Generate Another
+                    Analyze Another
                   </button>
                   <Link
                     to="/dashboard"

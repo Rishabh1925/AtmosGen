@@ -116,11 +116,11 @@ def compare_processed_images():
             print(f"  Correlation: {correlation:.6f}")
             
             if correlation > 0.99:
-                print(f"  ⚠️  Images are nearly identical!")
+                print(f"    Images are nearly identical!")
             elif correlation > 0.95:
-                print(f"  ⚠️  Images are very similar")
+                print(f"    Images are very similar")
             else:
-                print(f"  ✓ Images are different")
+                print(f"   Images are different")
 
 def create_detailed_visualization():
     """Create a detailed visualization of the raw data"""
@@ -164,7 +164,7 @@ def create_detailed_visualization():
     plt.savefig('../data/processed/detailed_analysis.png', dpi=150, bbox_inches='tight')
     plt.close()
     
-    print("✓ Detailed visualization saved: ../data/processed/detailed_analysis.png")
+    print(" Detailed visualization saved: ../data/processed/detailed_analysis.png")
 
 def main():
     """Main analysis function"""
@@ -211,9 +211,9 @@ def main():
         print(f"  Std variation: {std_variation*100:.2f}%")
         
         if mean_variation < 0.01 and std_variation < 0.01:
-            print("⚠️  WARNING: Files have very similar statistics - might be the same scene!")
+            print("  WARNING: Files have very similar statistics - might be the same scene!")
         else:
-            print("✓ Files show reasonable variation")
+            print(" Files show reasonable variation")
     
     # Compare processed images
     compare_processed_images()
